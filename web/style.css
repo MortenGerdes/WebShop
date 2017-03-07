@@ -1,0 +1,96 @@
+body
+{
+    background-color: white;
+}
+
+img
+{
+    width: 180px;
+    height: 254px;
+}
+
+.main
+{
+    margin: 50px auto;
+}
+
+.headline
+{
+    text-align: left;
+    margin-left: 30px;
+    font-size: 30px;
+}
+
+.controlpanel
+{
+    float: left;
+    margin: 30px;
+    width: 200px;
+    height: 550px;
+    background-color: gray;
+}
+
+.productdisplayarea
+{
+    margin-top: 15px;
+    width: auto;
+    background-color: white;
+}
+
+.specificproductouter
+{
+    width: 240px;
+    height: 496px;
+    border: solid;
+    margin-top: 15px;
+    margin-right: 4px;
+    float:left;
+}
+
+.productpic
+{
+    width: 180px;
+    height: 254px;
+    margin-left: 30px;
+    margin-top: 15px;
+}
+
+.producttitle
+{
+    width: auto;
+    height: 5px;
+    margin-top: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.productinfo
+{
+    width: 205px;
+    height: 145px;
+    border-top: solid;
+    margin: 15px;
+    text-align: center;
+}
+
+.productpurchase
+{
+    width: 240px;
+    height: 40px;
+    bottom: 30px;
+}
+
+.pricetext
+{
+    background-color: gold;
+    margin-left: 10px;
+    font-size: 25px;
+    color: white;
+    float: left;
+}
+
+input[name="addtocart"]
+{
+    margin-right: 10px;
+    float: right;
+}

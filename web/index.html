@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>KÃ¸b spil</title>
+    <script src="shopInventory.js"></script>
+    <link href="style.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body>
+
+<div class="headline">
+    Awesome<br>Games
+</div>
+
+<div class="controlpanel">
+    <b>Search options:</b> <br><br>
+    <form>
+        <input type="checkbox" name="shopoption" value="">Sort by price<br>
+        <input type="checkbox" name="shopoption" value="">Daily Deals<br>
+        <input type="checkbox" name="shopoption" value="">Below 10$<br>
+        <input type="checkbox" name="shopoption" value="">Below 20$<br>
+        <input type="checkbox" name="shopoption" value="">Below 30$<br>
+        <br>
+        Search product: <input type="text" name="item" size="15" value="Search product"><br>
+    </form>
+</div>
+
+<div id="area" class="productdisplayarea">
+
+    <div class="specificproductouter">
+        <div class="productpic">
+            <!-- Product picture -->
+            <img src="https://s-media-cache-ak0.pinimg.com/originals/4f/55/06/4f55064f1bf8d7c83ac4e11216992dd5.jpg"
+                 alt="Cover art of the game">
+        </div>
+
+        <div class="producttitle">
+            Infinite Redemption
+        </div>
+
+        <div class="productinfo">
+            In a world, where hamsters dominate the globe, a lonely emo teenage dwarf hamster struggles on a salary
+            <em>below</em> minimum wage. Fix it.
+        </div>
+
+        <div class="productpurchase">
+            <div class="pricetext">
+                20$
+            </div>
+
+            <input name="addtocart" type="submit" value="Add to Cart">
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
