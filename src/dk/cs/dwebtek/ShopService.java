@@ -60,24 +60,26 @@ public class ShopService
 
     @POST
     @Path("login")
-    public Response login(@FormParam("username") String user, @FormParam("password") String pass) throws URISyntaxException
-    {
+    @Consumes(MediaType.WILDCARD)
+    public String login(String input) throws URISyntaxException {
+        JSONObject cusInfo = new JSONObject(input);
+        String user = cusInfo.getString("userName");
+        String pass = cusInfo.getString("passWord");
+
         if(session.getAttribute("loggedIn") == null)
         {
-            URI target = new URI("http://localhost:8081/login.html");
             if (Week3Runner.login(new String[]{"", user, pass}) == true)
             {
-                target = new URI("http://localhost:8081/index.html");
                 session.setAttribute("loggedIn", user);
+                return "OK";
             } else
             {
-                target = new URI("http://localhost:8081/failedLogin.html");
+                return "FAIL";
             }
-            return Response.seeOther(target).build();
         }
         else
         {
-            return Response.seeOther(new URI("http://localhost:8081/index.html")).build();
+            return "ACTIVE";
         }
     }
 
@@ -126,8 +128,8 @@ public class ShopService
     @POST
     @Path("newCustomer")
     @Consumes(MediaType.WILDCARD)
-    public String newCustomer(String x) throws URISyntaxException {
-        JSONObject cusInfo = new JSONObject(x);
+    public String newCustomer(String input) throws URISyntaxException {
+        JSONObject cusInfo = new JSONObject(input);
         String userName = cusInfo.getString("userName");
         String pass = cusInfo.getString("passWord");
 

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>KÃ¸b spil</title>
-    <script src="shopInventory.js"></script>
+    <script src="login.js"></script>
+    <!-- <script src="shopInventory.js"></script> -->
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 
@@ -16,7 +17,6 @@
     </div>
     <div id="logInButton">
         <table>
-            <form action="rest/shop/login" method="post">
                 <tr>
                     <td>Brugernavn:</td>
                     <td><input type="text" name="username" id="username"></td>
@@ -29,11 +29,10 @@
                 <tr>
                     <td></td>
                     <td>
-                        <input type="submit" name="LogInButton" value="Log Ind">
-                        <input type="submit" name="CreateCustomer" value="Ny Bruger" id="CreateCustomer">
+                        <input type="submit" name="LogInButton" value="Log Ind" onclick="login()">
+                        <input type="submit" name="CreateCustomer" value="Ny Bruger" onclick="toCreateUser()">
                     </td>
                 </tr>
-            </form>
         </table>
     </div>
 </div>

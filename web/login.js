@@ -4,20 +4,27 @@
 
 
 function login() {
-    var userName = document.getElementById("username").value;,
+    var userName = document.getElementById("username").value;
     var pass = document.getElementById("pass").value;
+    console.log("Username: " + userName + " Password: " + pass);
     var cusInfo ={"userName": userName, "passWord": pass};
     console.log(cusInfo);
 
     sendRequest("POST", "rest/shop/login", JSON.stringify(cusInfo),function (response) {
         if (response == "OK")
-            console.log("logged in");
+            alert("logged in");
+                // document.getElementById("logInButton").innerHTML="";
         if (response == "ACTIVE")
-            console.log("Already logged in!");
+            alert("Already logged in!");
         else{
-            console.log("Fail! :(");
+            alert("Wrong username or password (Or server is busy)");
         }
     } )
+
+}
+
+function toCreateUser() {
+    window.location.replace("http://localhost:8081/createAccount.html");
 
 }
 
