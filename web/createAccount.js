@@ -13,12 +13,13 @@ function createCustomer() {
     var userName = document.getElementById("username").value;
     var pass = document.getElementById("password").value;
     var rePass = document.getElementById("rePassword").value;
-    var cusInfo = {userName: userName, passWord: pass};
+    var cusInfo = {"userName": userName, "passWord": pass};
     if (pass != rePass) {
         alert("Passwordet var ikke ens i de to passwordfelter!")
     }
     else {
         console.log("yes");
+        console.log(cusInfo);
         sendRequest("POST", "rest/shop/newCustomer", JSON.stringify(cusInfo), doStuff() )
     }
     //sendRequest(httpMethod, url, body, responseHandler)

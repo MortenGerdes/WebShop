@@ -1,10 +1,5 @@
 package dk.cs.dwebtek;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import dk.cs.dwebtek.Requests.CreateCustomerRequest;
-import org.glassfish.jersey.servlet.ServletContainer;
-
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
@@ -17,13 +12,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Path("shop")
-public class ShopService {
+public class ShopService
+{
     /**
      * Our Servlet session. We will need this for the shopping basket
      */
     HttpSession session;
 
-    public ShopService(@Context HttpServletRequest servletRequest) {
+    public ShopService(@Context HttpServletRequest servletRequest)
+    {
         session = servletRequest.getSession();
     }
 
@@ -35,16 +32,19 @@ public class ShopService {
     @GET
     @Path("items")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Item> getItems() {
+    public List<Item> getItems()
+    {
         return CloudServiceSingleton.getInstance().itemsFromXMLToJava();
     }
 
     @GET
     @Path("customer")
     @Produces(MediaType.APPLICATION_JSON)
-    public Customer getLoggedInCustomer() {
-        if (session.getAttribute("loggedIn") != null) {
-            return CloudServiceSingleton.getInstance().getCustomerByName((String) session.getAttribute("loggedIn"));
+    public Customer getLoggedInCustomer()
+    {
+        if(session.getAttribute("loggedIn") != null)
+        {
+            return CloudServiceSingleton.getInstance().getCustomerByName((String)session.getAttribute("loggedIn"));
         }
         return null;
     }
@@ -52,7 +52,7 @@ public class ShopService {
     @GET
     @Path("customerSales")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<CustomerSale> getCustomerSales() {
+    public List<CustomerSale> getCustomerSales(){
         CloudService cs = new CloudService();
 
         return cs.salesFromXMLToJava(Integer.parseInt(getLoggedInCustomer().getId()));
@@ -60,23 +60,31 @@ public class ShopService {
 
     @POST
     @Path("login")
-    public Response login(@FormParam("username") String user, @FormParam("password") String pass) throws URISyntaxException {
-        if (session.getAttribute("loggedIn") == null) {
+    public Response login(@FormParam("username") String user, @FormParam("password") String pass) throws URISyntaxException
+    {
+        if(session.getAttribute("loggedIn") == null)
+        {
             URI target = new URI("http://localhost:8081/login.html");
-            if (Week3Runner.login(new String[]{"", user, pass}) == true) {
+            if (Week3Runner.login(new String[]{"", user, pass}) == true)
+            {
                 target = new URI("http://localhost:8081/index.html");
                 session.setAttribute("loggedIn", user);
-            } else {
+            } else
+            {
                 target = new URI("http://localhost:8081/failedLogin.html");
             }
             return Response.seeOther(target).build();
-        } else {
+        }
+        else
+        {
             return Response.seeOther(new URI("http://localhost:8081/index.html")).build();
         }
     }
 
-    public boolean isLoggedIn() {
-        if (session.getAttribute("loggedIn") != null) {
+    public boolean isLoggedIn()
+    {
+        if(session.getAttribute("loggedIn") != null)
+        {
             return true;
         }
         return false;
@@ -84,13 +92,16 @@ public class ShopService {
 
     @POST
     @Path("addbasket")
-    public void saveToBasket(@QueryParam("itemID") int id) {
+    public void saveToBasket(@QueryParam("itemID") int id)
+    {
         saveToBasket(CloudServiceSingleton.getInstance().getItemByID(id));
     }
 
-    public void saveToBasket(Item item) {
+    public void saveToBasket(Item item)
+    {
         List<Item> items = getCustomerBasket();
-        if (!items.contains(item)) {
+        if(!items.contains(item))
+        {
             items.add(item);
             session.setAttribute((((String) session.getAttribute("loggedIn")) + "basket"), items);
         }
@@ -99,23 +110,25 @@ public class ShopService {
     @GET
     @Path("getbasket")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Item> getCustomerBasket() {
-        if (!isLoggedIn()) {
+    public List<Item> getCustomerBasket()
+    {
+        if(!isLoggedIn())
+        {
             return null;
         }
-        if (session.getAttribute(((String) session.getAttribute("loggedIn")) + "basket") == null) {
-            session.setAttribute((((String) session.getAttribute("loggedIn")) + "basket"), new ArrayList<Item>());
+        if(session.getAttribute(((String)session.getAttribute("loggedIn")) + "basket") == null)
+        {
+            session.setAttribute((((String)session.getAttribute("loggedIn")) + "basket"), new ArrayList<Item>());
         }
-        return (List<Item>) session.getAttribute(((String) session.getAttribute("loggedIn")) + "basket");
+        return (List<Item>)session.getAttribute(((String)session.getAttribute("loggedIn")) + "basket");
     }
 
     @POST
     @Path("newCustomer")
-    @Consumes(MediaType.APPLICATION_JSON)
-    //@Produces(MediaType.APPLICATION_JSON)
-    public Response newCustomer(List<String> userInfo) throws URISyntaxException {
+    @Consumes(MediaType.WILDCARD)
+    public Response newCustomer(String x) throws URISyntaxException {
         System.out.println("!!!");
-        System.out.println(userInfo);
+        System.out.println(x);
 //        System.out.println(user + " " + pass);
 //        URI target = new URI("http://localhost:8081/failedNewCustomer.html");
 //        if (CloudServiceSingleton.getInstance().createCustomer(user, pass).isSuccess()) {
