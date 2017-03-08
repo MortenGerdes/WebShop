@@ -130,15 +130,14 @@ public class ShopService
     @POST
     @Path("newCustomer")
     @Consumes(MediaType.WILDCARD)
-    public Response newCustomer(String x) throws URISyntaxException {
-        System.out.println("!!!");
+    public String newCustomer(String x) throws URISyntaxException {
+        JSONObject cusInfo = new JSONObject(x);
+        String userName = cusInfo.getString("userName");
+        String pass = cusInfo.getString("passWord");
 
-//        System.out.println(user + " " + pass);
-//        URI target = new URI("http://localhost:8081/failedNewCustomer.html");
-//        if (CloudServiceSingleton.getInstance().createCustomer(user, pass).isSuccess()) {
-//            target = new URI("http://localhost:8081/login.html");
-//            return Response.seeOther(target).build();
-//        }
-        return Response.status(503).build();
+        if (CloudServiceSingleton.getInstance().createCustomer(userName, pass).isSuccess()) {
+            return "OK";
+        }
+        return "FAILED";
     }
 }
