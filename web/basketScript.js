@@ -55,7 +55,7 @@ function addItemsToBasket(basketList) {
         newRow.appendChild(name);
 
         var itemDes = document.createElement("td");
-        itemDes.textContent = item.itemDescription;
+        itemDes.innerHTML = item.itemDescription;
         newRow.appendChild(itemDes);
 
         var amount = document.createElement("td");
