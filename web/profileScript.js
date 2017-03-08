@@ -40,7 +40,10 @@ function addItemsToSalesTable(items) {
         var newRow = document.createElement("tr");
 
         var itemURL = document.createElement("td");
-        itemURL.textContent = item.itemURL;
+        var thePic = document.createElement("img");
+        thePic.setAttribute("src", item.itemURL);
+        thePic.setAttribute("alt", "Cover art of the game");
+        itemURL.appendChild(thePic);
         newRow.appendChild(itemURL);
 
         var itemName = document.createElement("td");
@@ -70,10 +73,7 @@ function addItemsToSalesTable(items) {
 
         table.appendChild(newRow);
     }
-
-
 }
-
 
 var http;
 if (!XMLHttpRequest)
@@ -94,6 +94,9 @@ function sendRequest(httpMethod, url, body, responseHandler) {
     http.send(body);
 }
 
+
+//*** This code is copyright 2002-2016 by Gavin Kistner, !@phrogz.net
+//*** It is covered under the license viewable at http://phrogz.net/JS/_ReuseLicense.txt
 Date.prototype.customFormat = function(formatString){
     var YYYY,YY,MMMM,MMM,MM,M,DDDD,DDD,DD,D,hhhh,hhh,hh,h,mm,m,ss,s,ampm,AMPM,dMod,th;
     var dateObject = this;
