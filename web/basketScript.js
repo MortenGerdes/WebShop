@@ -1,25 +1,17 @@
 /**
  * Created by jackc_000 on 08-03-2017.
  */
+/**
+ * Created by jackc_000 on 08-03-2017.
+ */
 
 window.onload = function () {
 
-    sendRequest("GET", "rest/shop/customer", null, function (customer) {
-        var customerInfo = JSON.parse(customer);
-        addCustomerName(customerInfo);
+    sendRequest("GET", "rest/shop/getbasket", null, function (basket) {
+        var basketList = JSON.parse(basket);
+        addItemsToBasket(basketList);
     });
 
-    setTimeout(initCusSales, 1000);
-}
-
-function initCusSales()
-{
-
-    sendRequest("GET", "rest/shop/customerSales", null, function (customerSales) {
-        //This code is called when the server has sent its data
-        var items = JSON.parse(customerSales);
-        addItemsToSalesTable(items);
-    });
 
 }
 
@@ -29,14 +21,14 @@ function addCustomerName(customerInfo){
 
 }
 
-function addItemsToSalesTable(items) {
+function addItemsToBasket(basketList) {
 
     //Remove all contents of the table body (if any exist)
     var table = document.getElementById("salesTable")
     //Loop through the items from the server
-    for (var i = 0; i < items.length; i++) {
+    for (var i = 0; i < basketList.length; i++) {
 
-        var item = items[i];
+        var item = basketList[i];
 
         var newRow = document.createElement("tr");
 
@@ -58,10 +50,7 @@ function addItemsToSalesTable(items) {
 
         table.appendChild(newRow);
     }
-
-
 }
-
 
 var http;
 if (!XMLHttpRequest)
