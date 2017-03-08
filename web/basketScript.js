@@ -18,6 +18,10 @@ window.onload = function () {
         setTotalTotal();
     });
 
+    if(allPrices.length < 0){
+
+    }
+
 }
 
 function addCustomerName(customerInfo) {
@@ -93,9 +97,11 @@ function addItemsToBasket(basketList) {
         table.appendChild(newRow);
     }
 
-    var buyNowBut = document.getElementById("buyNow");
-    buyNowBut.createElement("input");
-
+    var buyNowRow = document.getElementById("buyNow");
+    var buyNowBut = document.createElement("input");
+    buyNowBut.setAttribute("type", "button");
+    buyNowBut.setAttribute("value", "Buy Now");
+    buyNowRow.appendChild(buyNowBut);
 }
 
 function setTotalTotal() {
