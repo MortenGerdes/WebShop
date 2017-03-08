@@ -4,29 +4,41 @@
 /**
  * Created by jackc_000 on 08-03-2017.
  */
+//global variable used for something
+var totalItems = 0;
+var allPrices;
 
 window.onload = function () {
 
     sendRequest("GET", "rest/shop/getbasket", null, function (basket) {
         var basketList = JSON.parse(basket);
         addItemsToBasket(basketList);
+        storeItemAmount(basketList);
+        storeAllPrices(basketList);
     });
-
-
+    var yo = "button1"
+    console.debug(yo.substr(6, 7));
 }
 
-function addCustomerName(customerInfo){
+function addCustomerName(customerInfo) {
     var header = document.getElementById("headerID");
     header.innerHTML = customerInfo.name + " ID: " + customerInfo.id;
 
 }
 
+function storeItemAmount(basketList) {
+    totalItems = basketList.length;
+}
+
+
 function addItemsToBasket(basketList) {
     console.debug("TEST");
     //Remove all contents of the table body (if any exist)
     var table = document.getElementById("salesTable")
+
     //Loop through the items from the server
     for (var i = 0; i < basketList.length; i++) {
+
 
         var item = basketList[i];
 
@@ -46,12 +58,27 @@ function addItemsToBasket(basketList) {
         var amount = document.createElement("td");
         amount.textContent = "";
 
+        var decrementBut = document.createElement("input");
+        decrementBut.setAttribute("type", "button");
+        decrementBut.setAttribute("value", "<-");
+        decrementBut.setAttribute("id", "button" + "-" + i);
+        decrementBut.setAttribute("onclick", "decrement(" + "\'" + "button" + "-" + i + "\'" + ")");
+        amount.appendChild(decrementBut);
 
         var amountInput = document.createElement("input");
+        amountInput.setAttribute("value", "1");
         amountInput.setAttribute("maxlength", "4");
         amountInput.setAttribute("size", "1");
-        amountInput.setAttribute("id", "amountInt");
+        amountInput.setAttribute("id", "amountInt" + "" + i);
         amount.appendChild(amountInput);
+
+        var incrementBut = document.createElement("input");
+        incrementBut.setAttribute("type", "button");
+        incrementBut.setAttribute("value", "->");
+        incrementBut.setAttribute("id", "button" + "" + i);
+        incrementBut.setAttribute("onclick", "increment(" + "\'" + "button" + i + "\'" + ")");
+        amount.appendChild(incrementBut);
+
         newRow.appendChild(amount);
 
         var price = document.createElement("td");
@@ -60,12 +87,102 @@ function addItemsToBasket(basketList) {
 
 
         var total = document.createElement("td");
-        total.textContent = item.itemPrice * parseInt(document.getElementById("amountInt"));
+        total.setAttribute("id", "total"+i);
+        total.textContent = item.itemPrice;
         newRow.appendChild(total);
 
         table.appendChild(newRow);
     }
 }
+
+function storeAllPrices(basketList){
+    var temp = [];
+
+    for(var i = 0; i<basketList.length; i++){
+        temp[i] = (basketList[i].itemPrice);
+    }
+    allPrices = temp;
+}
+
+function totalMult(index, amount) {
+
+    var indexInt = parseInt(index);
+    var total = document.getElementById("total" + indexInt);
+
+    var newTotal = allPrices[index] * amount;
+
+    console.debug("This is new total: " + allPrices[index]);
+
+    total.textContent = "" + newTotal;
+
+}
+
+
+
+function increment(id) {
+
+    if (totalItems < 10) {
+
+        var textField = document.getElementById("amountInt" + id.toString().substr(6, 7));
+
+        console.debug(id);
+        var number = parseInt(textField.value);
+        var numberInt = parseInt(number) + 1;
+
+        textField.value = "" + numberInt;
+
+        //calls total multiplier function
+        totalMult(id.toString().substr(6, 7), numberInt);
+
+    }
+    else if (totalItems >= 10 && totalItems < 100) {
+        var textField = document.getElementById("amountInt" + id.substr(6, 8));
+        var number = parseInt(textField.value);
+        var numberInt = parseInt(number) + 1;
+
+        textField.value = "" + numberInt;
+        totalMult(id.toString().substr(6, 8), numberInt);
+    }
+    else {
+        console.debug("LOL");
+    }
+
+
+
+}
+
+function decrement(id) {
+
+
+    if (totalItems < 10) {
+
+
+        var textField = document.getElementById("amountInt" + id.substr(7, 8));
+        if (textField.value > 0) {
+            console.debug("amountInt" + id.substr(7, 8));
+            var number = textField.value;
+            var numberInt = parseInt(number) - 1;
+
+            textField.value = "" + numberInt;
+            totalMult(id.toString().substr(7, 8), numberInt);
+        }
+    }
+    else if (totalItems >= 10 && totalItems < 100) {
+
+        var textField = document.getElementById("amountInt" + id.substr(7, 9));
+        if (textField.value > 0) {
+            var number = textField.value;
+            var numberInt = parseInt(number) - 1;
+
+            textField.value = "" + numberInt;
+            totalMult(id.toString().substr(7, 9), numberInt);
+        }
+    }
+    else {
+        console.debug("LOL2")
+    }
+}
+
 
 var http;
 if (!XMLHttpRequest)
@@ -76,7 +193,7 @@ else
 function sendRequest(httpMethod, url, body, responseHandler) {
     http.open(httpMethod, url);
     if (httpMethod == "POST") {
-        http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     }
     http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {
