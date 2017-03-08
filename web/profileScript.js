@@ -4,27 +4,30 @@
 
 window.onload = function () {
 
-    sendRequest("GET", "rest/shop/customer", null, function (customer) {
-        var customerInfo = JSON.parse(customer)
-        getCustomerName(customerInfo)
-    });
-
     sendRequest("GET", "rest/shop/customerSales", null, function (customerSales) {
         //This code is called when the server has sent its data
         var items = JSON.parse(customerSales);
-        addItemsToSalesTable(items)
+        addItemsToSalesTable(items);
     });
 
-
+    setTimeout(initCusName, 300);
 }
 
-function getCustomerName(customerInfo){
-    var tableDiv = document.getElementsByID("tableDiv");
+function initCusName()
+{
+    sendRequest("GET", "rest/shop/customer", null, function (customer) {
+        var customerInfo = JSON.parse(customer);
+        addCustomerName(customerInfo);
+    });
+}
+
+function addCustomerName(customerInfo){
+    console.log("went here 1");
+    var tableDiv = document.getElementById("tableDiv");
     var header = document.createElement("h");
-    tableDiv.appendChild(header);
 
     header.textContent = customerInfo.name + "           ID: " + customerInfo.id;
-
+    tableDiv.appendChild(header);
 }
 
 function addItemsToSalesTable(items) {
