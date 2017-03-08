@@ -85,9 +85,7 @@ function addItemToSalesTable(items){
 
 function whenAddedToBasket() {
     alert("Item added to basket");
-
 }
-
 
 /////////////////////////////////////////////////////
 // Code from slides

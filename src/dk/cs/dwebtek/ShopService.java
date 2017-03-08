@@ -1,5 +1,8 @@
 package dk.cs.dwebtek;
 
+import jdk.nashorn.internal.parser.JSONParser;
+import jdk.nashorn.internal.runtime.JSONFunctions;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
@@ -10,6 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.*;
 
 @Path("shop")
 public class ShopService
@@ -123,4 +127,17 @@ public class ShopService
         return (List<Item>)session.getAttribute(((String)session.getAttribute("loggedIn")) + "basket");
     }
 
+    @POST
+    @Path("newCustomer")
+    @Consumes(MediaType.WILDCARD)
+    public String newCustomer(String x) throws URISyntaxException {
+        JSONObject cusInfo = new JSONObject(x);
+        String userName = cusInfo.getString("userName");
+        String pass = cusInfo.getString("passWord");
+
+        if (CloudServiceSingleton.getInstance().createCustomer(userName, pass).isSuccess()) {
+            return "OK";
+        }
+        return "FAILED";
+    }
 }

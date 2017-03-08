@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <link>
-    <meta charset="UTF-8">
-    <title>CreateAccount</title>
-    <link href="style.css" rel="stylesheet" type="text/css">
+<meta charset="UTF-8">
+<title>CreateAccount</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<script src="createAccount.js"></script>
+
 </head>
 <body>
 <table>
-    <tr>
-        <td>Brugernavn:</td>
-        <td><input type="text"></td>
-    </tr>
-    <tr>
-        <td>Adgangskode:</td>
-        <td><input type="password"></td>
-    </tr>
-    <tr>
-        <td>Gentag adgangskode:</td>
-        <td><input type="password"></td>
-    </tr>
-    <tr>
-        <td></td>
-        <td> <input type="submit" value="Opret">
-            <form action="login.html"><input type="submit" value="Fortryd"></form>
-        </td>
-    </tr>
+        <tr>
+            <td>Brugernavn:</td>
+            <td><input type="text" name="username" id="username"></td>
+        </tr>
+        <tr>
+            <td>Adgangskode:</td>
+            <td><input type="password" name="password" id="password"></td>
+        </tr>
+        <tr>
+            <td>Gentag adgangskode:</td>
+            <td><input type="password" name="rePassword" id="rePassword"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="button" value="Opret" id="create" onclick="createCustomer()">
+            </td>
+        </tr>
 </table>
+<form action="login.html"><input type="submit" value="Fortryd"></form>
 
 </body>
 </html>

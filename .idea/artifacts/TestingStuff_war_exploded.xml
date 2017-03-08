@@ -11,6 +11,7 @@
           <element id="library" level="project" name="org.jdom:jdom2:2.0.6" />
           <element id="library" level="project" name="com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.8.7" />
           <element id="library" level="project" name="Jersey-2.2" />
+          <element id="library" level="project" name="org.json:json:20160810" />
         </element>
       </element>
     </root>
