@@ -267,6 +267,7 @@ public class CloudService
     public List<CustomerSale> salesFromXMLToJava(int customerID)
     {
         List<CustomerSale> sale = new ArrayList<>();
+        List<Item> shopItems = itemsFromXMLToJava();
         OperationResult<Document> customerSales = listCustomerSales(customerID);
 
         for (Element item : customerSales.getResult().getRootElement().getChildren("sale", NS))
@@ -279,6 +280,14 @@ public class CloudService
             cs.setShopID(Integer.parseInt(item.getChildText("shopID", NS)));
             cs.setSaleItemPrice(Integer.parseInt(item.getChildText("saleItemPrice", NS)));
 
+            for (Item theItem : shopItems)
+            {
+                if (theItem.getItemID() == cs.getItemID())
+                {
+                    cs.setItemName(theItem.getItemName());
+                    cs.setItemURL(theItem.getItemURL());
+                }
+            }
             sale.add(cs);
         }
         return sale;
@@ -329,7 +338,7 @@ public class CloudService
     {
         List<Item> items = itemsFromXMLToJava();
 
-        for(Item item: items)
+        for (Item item : items)
         {
             if (item.getItemID() == id)
             {

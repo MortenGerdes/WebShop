@@ -11,6 +11,28 @@ public class CustomerSale
     private int itemID;
     private int customerID;
     private int saleItemPrice;
+    private String itemName;
+    private String itemURL;
+
+    public String getItemURL()
+    {
+        return itemURL;
+    }
+
+    public void setItemURL(String itemURL)
+    {
+        this.itemURL = itemURL;
+    }
+
+    public String getItemName()
+    {
+        return itemName;
+    }
+
+    public void setItemName(String itemName)
+    {
+        this.itemName = itemName;
+    }
 
     public long getSaleTime()
     {
