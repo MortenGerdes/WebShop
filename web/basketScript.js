@@ -22,7 +22,7 @@ function addCustomerName(customerInfo){
 }
 
 function addItemsToBasket(basketList) {
-
+    console.debug("TEST");
     //Remove all contents of the table body (if any exist)
     var table = document.getElementById("salesTable")
     //Loop through the items from the server
@@ -32,21 +32,33 @@ function addItemsToBasket(basketList) {
 
         var newRow = document.createElement("tr");
 
-        var shopID = document.createElement("td");
-        shopID.textContent = item.shopID;
-        newRow.appendChild(shopID);
+        var name = document.createElement("td");
+        name.textContent = item.itemName;
+        newRow.appendChild(name);
 
-        var itemID = document.createElement("td");
-        itemID.textContent = item.itemID;
-        newRow.appendChild(itemID);
-
-        var price = document.createElement("td");
-        price.textContent = item.saleItemPrice;
-        newRow.appendChild(price);
+        var itemDes = document.createElement("td");
+        itemDes.textContent = item.itemDescription;
+        newRow.appendChild(itemDes);
 
         var amount = document.createElement("td");
-        amount.textContent = item.saleAmount;
+        amount.textContent = "";
+
+
+        var amountInput = document.createElement("input");
+        amountInput.setAttribute("maxlength", "4");
+        amountInput.setAttribute("size", "1");
+        amountInput.setAttribute("id", "amountInt");
+        amount.appendChild(amountInput);
         newRow.appendChild(amount);
+
+        var price = document.createElement("td");
+        price.textContent = item.itemPrice;
+        newRow.appendChild(price);
+
+
+        var total = document.createElement("td");
+        total.textContent = item.itemPrice * parseInt(document.getElementById("amountInt"));
+        newRow.appendChild(total);
 
         table.appendChild(newRow);
     }
