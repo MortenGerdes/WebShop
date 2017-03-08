@@ -1,5 +1,8 @@
 package dk.cs.dwebtek;
 
+import jdk.nashorn.internal.parser.JSONParser;
+import jdk.nashorn.internal.runtime.JSONFunctions;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
@@ -10,6 +13,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import org.json.*;
 
 @Path("shop")
 public class ShopService
@@ -128,7 +132,7 @@ public class ShopService
     @Consumes(MediaType.WILDCARD)
     public Response newCustomer(String x) throws URISyntaxException {
         System.out.println("!!!");
-        System.out.println(x);
+
 //        System.out.println(user + " " + pass);
 //        URI target = new URI("http://localhost:8081/failedNewCustomer.html");
 //        if (CloudServiceSingleton.getInstance().createCustomer(user, pass).isSuccess()) {
