@@ -26,9 +26,6 @@ function createCustomer() {
     }
 }
 
-
-////
-
 var http;
 if (!XMLHttpRequest)
     http = new ActiveXObject("Microsoft.XMLHTTP");

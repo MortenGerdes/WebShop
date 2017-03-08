@@ -29,7 +29,6 @@ function addCustomerName(customerInfo){
 }
 
 function addItemsToSalesTable(items) {
-
     //Remove all contents of the table body (if any exist)
     var table = document.getElementById("salesTable")
     //Loop through the items from the server

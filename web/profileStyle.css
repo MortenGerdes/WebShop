@@ -44,7 +44,7 @@ body {
 }
 
 table {
-    width: 70%;
+    width: 90%;
     border: 1px solid black;
     font-family: arial;
     font-size: medium;
@@ -70,8 +70,13 @@ tr:nth-child(even) {
     background-color: #f2f2f2
 }
 
+/*
 img
 {
     width: 180px;
     height: 254px;
+}
+*/
+input {
+    size: 5px;
 }

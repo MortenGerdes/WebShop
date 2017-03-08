@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Shopping Basket</title>
     <link href="profileStyle.css" rel="stylesheet" type="text/css">
-    <script src="basketScript.js"></script>
+    <script type="text/javascript" src="basketScript.js"></script>
 </head>
 <body>
 <div id="topbar">
@@ -25,20 +25,22 @@
 
         <tr>
 
-            <th>Shop ID</th>
+            <th>Item</th>
 
-
-            <th>Item ID</th>
-
-
-            <th>Price</th>
-
+            <th>Description</th>
 
             <th>Amount</th>
 
-            <th>Date</th>
+            <th>Price</th>
 
+            <th>Total</th>
         </tr>
+       <!-- <tr>
+            <input type="button" value="<-" onclick="decrement()">
+            <input id="amountInt" type="text" value="1" size="1" maxlength="3">
+            <input type="button" value="->" onclick="increment()">
+        </tr>
+        -->
         </tbody>
     </table>
 </div>

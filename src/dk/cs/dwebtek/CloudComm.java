@@ -78,7 +78,6 @@ public class CloudComm
                         }
                     }
                 }
-
             } else
             {
                 return OperationResult.Fail("Not correct response: " + conn.getResponseCode());
