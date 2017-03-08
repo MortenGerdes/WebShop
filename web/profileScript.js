@@ -7,7 +7,7 @@ window.onload = function () {
     sendRequest("GET", "rest/shop/customer", null, function (customer) {
         var customerInfo = JSON.parse(customer)
         getCustomerName(customerInfo)
-    })
+    });
 
     sendRequest("GET", "rest/shop/customerSales", null, function (customerSales) {
         //This code is called when the server has sent its data
