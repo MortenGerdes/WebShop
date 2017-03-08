@@ -2,13 +2,6 @@
  * Created by SofusPeter on 08-03-2017.
  */
 
-// document.getElementById("create").addEventListener("click", function () {
-//     console.log("lol");
-// });
-
-//addEventListener(create, "onClick", createCustomer() );
-
-
 function createCustomer() {
     var userName = document.getElementById("username").value;
     var pass = document.getElementById("password").value;

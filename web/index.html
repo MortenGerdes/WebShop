@@ -11,8 +11,33 @@
 <body>
 
 <div class="headline">
-    Awesome<br>Games
+    <div id="companyName">
+        Amazing<br>Games
+    </div>
+    <div id="logInButton">
+        <table>
+            <form action="rest/shop/login" method="post">
+                <tr>
+                    <td>Brugernavn:</td>
+                    <td><input type="text" name="username" id="username"></td>
+                </tr>
+                <tr>
+                    <td>Adgangskode:</td>
+                    <td><input type="password" name="password" id="pass"></td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" name="LogInButton" value="Log Ind">
+                        <input type="submit" name="CreateCustomer" value="Ny Bruger" id="CreateCustomer">
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </div>
 </div>
+
 <p id="welcomeMessage"></p>
 
 <div class="controlpanel">
