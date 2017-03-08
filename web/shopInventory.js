@@ -66,7 +66,7 @@ function addItemsToTable(items) {
 
         var itemDes = document.createElement("div");
         itemDes.setAttribute("class", "productinfo");
-        itemDes.textContent = item.itemDescription;
+        itemDes.innerHTML = item.itemDescription;
         special.appendChild(itemDes);
 
         var itemPur = document.createElement("div");

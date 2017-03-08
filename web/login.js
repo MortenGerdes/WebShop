@@ -20,7 +20,6 @@ function login() {
             alert("Wrong username or password (Or server is busy)");
         }
     } )
-
 }
 
 function toCreateUser() {
