@@ -1,5 +1,7 @@
 package dk.cs.dwebtek;
 
+import dk.cs.dwebtek.Requests.CreateCustomerRequest;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
@@ -122,5 +124,25 @@ public class ShopService
         }
         return (List<Item>)session.getAttribute(((String)session.getAttribute("loggedIn")) + "basket");
     }
+
+    @POST
+    @Path("newCustomer")
+    public Response newCustomer(@FormParam("username") String user, @FormParam("password") String pass, @FormParam("rePassword") String rePass) throws URISyntaxException
+    {
+        System.out.println(user + " " + pass);
+        URI target = new URI("http://localhost:8081/failedNewCustomer.html");
+        if(!pass.equals(rePass)){
+            return Response.seeOther(target).build();
+        }
+        else{
+            if(CloudServiceSingleton.getInstance().createCustomer(user,pass).isSuccess())
+            {
+                target = new URI("http://localhost:8081/login.html");
+                return Response.seeOther(target).build();
+            }
+        return Response.status(503).build();
+        }
+    }
+
 
 }
