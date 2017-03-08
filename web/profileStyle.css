@@ -57,6 +57,10 @@ th, td {
     border-bottom: 1px solid #ddd
 }
 
+td{
+    height: 35px;
+}
+
 th {
     background-color: darkgray;
     color: white;
