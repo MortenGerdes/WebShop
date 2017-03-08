@@ -49,6 +49,15 @@ public class ShopService
         return null;
     }
 
+    @GET
+    @Path("customerSales")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<CustomerSale> getCustomerSales(){
+        CloudService cs = new CloudService();
+
+        return cs.salesFromXMLToJava(Integer.parseInt(getLoggedInCustomer().getId()));
+    }
+
     @POST
     @Path("login")
     public Response login(@FormParam("username") String user, @FormParam("password") String pass) throws URISyntaxException

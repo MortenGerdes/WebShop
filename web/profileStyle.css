@@ -1,6 +1,6 @@
 #topbar a {
     color: #fff;
-    font-size:1.3em;
+    font-size: medium;
     line-height: 1.25em;
     text-decoration: none;
     opacity: 0.5;
@@ -9,7 +9,7 @@
 
 #topbar {
     background: #4f4a41;
-    padding: 10px 0 10px 0;
+    /*padding: 10px 0 10px 0;*/
     text-align: center;
     height: 36px;
     overflow: hidden;
@@ -27,8 +27,39 @@
 
 body {
     background: #f0f0f0;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Arial;
     color: #313131;
     font-size: 62.5%;
     line-height: 1;
+}
+
+#tableDiv{
+    padding-top: 40px;
+    padding-left: 30px;
+}
+
+table {
+    width: 70%;
+    border: 1px solid black;
+    font-family: arial;
+}
+
+th, td {
+    height: 30px;
+    text-align: left;
+    vertical-align: bottom;
+    border-bottom: 1px solid #ddd
+}
+
+th {
+    background-color: darkgray;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
 }
