@@ -32,6 +32,9 @@ function addItemsToBasket(basketList) {
 
         var newRow = document.createElement("tr");
 
+        var shopID = document.createElement("tr");
+        shopID.textContent = item.shopID;
+
         var name = document.createElement("td");
         name.textContent = item.itemName;
         newRow.appendChild(name);
