@@ -7,27 +7,41 @@ window.onload = function () {
     //This code is called when the body element has been loaded and the application starts
 
     //Request items from the server. The server expects no request body, so we set it to null
+
+    addAllItems();
+    updateItemsFromSearch();
+};
+var oldQuery = "";
+function updateItemsFromSearch() {
+    var searchQuery = document.getElementById("searchField").value;
+    if(searchQuery != oldQuery) {
+        oldQuery = searchQuery;
+        var queryObject = {"query": searchQuery};
+        if (searchQuery != "Search product" && searchQuery != "") {
+            sendRequest("POST", "rest/shop/searchitem", JSON.stringify(queryObject), function (response) {
+                var items = JSON.parse(response);
+                addItemsToTable(items);
+            });
+        }
+        else {
+            addAllItems();
+        }
+    }
+    setTimeout(updateItemsFromSearch, 500);
+}
+
+function addAllItems() {
     sendRequest("GET", "rest/shop/items", null, function (itemsText) {
         //This code is called when the server has sent its data
         var items = JSON.parse(itemsText);
         addItemsToTable(items);
     });
-
-    //Register an event listener for button clicks
-    var updateButton = document.getElementById("update");
-    addEventListener(updateButton, "click", function () {
-        //Same as above, get the items from the server
-        sendRequest("GET", "rest/shop/items", null, function (itemsText) {
-            //This code is called when the server has sent its data
-            var items = JSON.parse(itemsText);
-            addItemsToTable(items);
-        });
-    });
-};
+}
 
 function addItemsToTable(items) {
     //Get the table body we we can add items to it
     var productDiv = document.getElementById("area");
+    productDiv.innerHTML = "";
     //Remove all contents of the table body (if any exist)
 
     //Loop through the items from the server
@@ -77,7 +91,7 @@ function addItemsToTable(items) {
     }
 }
 
-function addItemToSalesTable(items){
+function addItemToSalesTable(items) {
 
     var productDiv = document.getElementById("area");
 
@@ -113,7 +127,7 @@ else
 function sendRequest(httpMethod, url, body, responseHandler) {
     http.open(httpMethod, url);
     if (httpMethod == "POST") {
-        http.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+        http.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     }
     http.onreadystatechange = function () {
         if (http.readyState == 4 && http.status == 200) {

@@ -1,8 +1,5 @@
 package dk.cs.dwebtek;
 
-import jdk.nashorn.internal.parser.JSONParser;
-import jdk.nashorn.internal.runtime.JSONFunctions;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.*;
@@ -22,7 +19,6 @@ public class ShopService
      * Our Servlet session. We will need this for the shopping basket
      */
     HttpSession session;
-
     public ShopService(@Context HttpServletRequest servletRequest)
     {
         session = servletRequest.getSession();
@@ -85,15 +81,6 @@ public class ShopService
         }
     }
 
-    public boolean isLoggedIn()
-    {
-        if(session.getAttribute("loggedIn") != null)
-        {
-            return true;
-        }
-        return false;
-    }
-
     @POST
     @Path("addbasket")
     public void saveToBasket(@QueryParam("itemID") int id)
@@ -139,5 +126,34 @@ public class ShopService
             return "OK";
         }
         return "FAILED";
+    }
+
+    @POST
+    @Path("searchitem")
+    @Consumes(MediaType.WILDCARD)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Item> filterSearch(String x)
+    {
+        JSONObject obj = new JSONObject(x);
+        String searchQuery = obj.getString("query");
+        List<Item> oldItems = CloudServiceSingleton.getInstance().itemsFromXMLToJava();
+        List<Item> newItems = new ArrayList<>();
+        for(Item oldItem: oldItems)
+        {
+            if(oldItem.getItemName().toLowerCase().contains(searchQuery.toLowerCase()))
+            {
+                newItems.add(oldItem);
+            }
+        }
+        return newItems;
+    }
+
+    public boolean isLoggedIn()
+    {
+        if(session.getAttribute("loggedIn") != null)
+        {
+            return true;
+        }
+        return false;
     }
 }
