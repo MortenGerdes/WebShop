@@ -62,7 +62,7 @@ public class ShopService
                 session.setAttribute("loggedIn", user);
             } else
             {
-                target = new URI("http://localhost:8081/login.html");
+                target = new URI("http://localhost:8081/failedLogin.html");
             }
             return Response.seeOther(target).build();
         }
