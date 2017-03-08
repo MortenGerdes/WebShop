@@ -3,6 +3,7 @@
  */
 //Run this function when we have loaded the HTML document
 window.onload = function () {
+    var message = document.getElementById("welcomeMessage");
     //This code is called when the body element has been loaded and the application starts
 
     //Request items from the server. The server expects no request body, so we set it to null

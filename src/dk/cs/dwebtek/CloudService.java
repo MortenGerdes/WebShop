@@ -268,6 +268,52 @@ public class CloudService
         return javaItems;
     }
 
+    public List<CustomerSale> salesFromXMLToJava(int customerID)
+    {
+        List<CustomerSale> sale = new ArrayList<>();
+        OperationResult<Document> customerSales = listCustomerSales(customerID);
+
+        for (Element item : customerSales.getResult().getRootElement().getChildren("sale", NS))
+        {
+            CustomerSale cs = new CustomerSale();
+            cs.setCustomerID(Integer.parseInt(item.getChildText("customerID", NS)));
+            cs.setItemID(Integer.parseInt(item.getChildText("itemID", NS)));
+            cs.setSaleTime(Long.parseLong(item.getChildText("saleTime", NS)));
+            cs.setSaleAmount(Integer.parseInt(item.getChildText("saleAmount", NS)));
+            cs.setShopID(Integer.parseInt(item.getChildText("shopID", NS)));
+            cs.setSaleItemPrice(Integer.parseInt(item.getChildText("saleItemPrice", NS)));
+
+            sale.add(cs);
+        }
+        return sale;
+    }
+
+    public Customer getCustomerByName(String name)
+    {
+        Customer cs = new Customer();
+        OperationResult<Document> items = listCustomers();
+        if (items.isSuccess()) {
+            Document doc = items.getResult();
+
+            for (Element child : doc.getRootElement().getChildren()) {
+                String pastId = "";
+                for (Element child2 : child.getChildren()) {
+                    if(child2.getText().equals(name) && child2.getName() == "customerName")
+                    {
+                        cs.setName(child2.getText());
+                        cs.setId(pastId);
+                        cs.setSales(salesFromXMLToJava(Integer.parseInt(pastId)));
+                    }
+                    if(child2.getName() == "customerID")
+                    {
+                        pastId = child2.getText();
+                    }
+                }
+            }
+        }
+        return cs;
+    }
+
     public boolean containsId(List<Item> list, int id)
     {
         for (Item item : list)

@@ -2,21 +2,24 @@ package dk.cs.dwebtek;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Path("shop")
-public class ShopService {
+public class ShopService
+{
     /**
      * Our Servlet session. We will need this for the shopping basket
      */
     HttpSession session;
 
-    public ShopService(@Context HttpServletRequest servletRequest) {
+    public ShopService(@Context HttpServletRequest servletRequest)
+    {
         session = servletRequest.getSession();
     }
 
@@ -28,48 +31,44 @@ public class ShopService {
     @GET
     @Path("items")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Item> getItems() {
+    public List<Item> getItems()
+    {
         System.out.println("test1");
         return CloudServiceSingleton.getInstance().itemsFromXMLToJava();
-
-        /*
-        System.out.println("Hej");
-        //You should get the items from the cloud server.
-        //In the template we just construct some simple data as an array of objects
-        // Here we have the JSON automated automatically by having models.
-        ArrayList<ItemTest> items = new ArrayList<>();
-        items.add(new ItemTest(1, "Stetson hat", 200 + priceChange));
-        items.add(new ItemTest(2, "Rifle", 500 + priceChange));
-        return items;
-        */
     }
 
+    @GET
+    @Path("customer")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Customer getLoggedInCustomer()
+    {
+        if(session.getAttribute("loggedIn") != null)
+        {
+            return CloudServiceSingleton.getInstance().getCustomerByName((String)session.getAttribute("loggedIn"));
+        }
+        return null;
+    }
 
- /*   @GET
-    @Path("items/manual")
-    public String getItemsConstructedManually() {
-        //You should get the items from the cloud server.
-        //In the template we just construct some simple data as an array of objects
-        //Here we output construct the JSON manually
-        JSONArray array = new JSONArray();
-
-        JSONObject jsonObject1 = new JSONObject();
-        jsonObject1.put("id", 1);
-        jsonObject1.put("name", "Stetson hat");
-        jsonObject1.put("price", 200 + priceChange);
-        array.put(jsonObject1);
-
-        JSONObject jsonObject2 = new JSONObject();
-        jsonObject2.put("id", 2);
-        jsonObject2.put("name", "Rifle");
-        jsonObject2.put("price", 500 + priceChange);
-        array.put(jsonObject2);
-
-        priceChange++;
-
-        //You can create a MessageBodyWriter so you don't have to call toString() every time
-        return array.toString();
-    }*/
-
-
+    @POST
+    @Path("login")
+    public Response login(@FormParam("username") String user, @FormParam("password") String pass) throws URISyntaxException
+    {
+        if(session.getAttribute("loggedIn") == null)
+        {
+            URI target = new URI("http://localhost:8081/login.html");
+            if (Week3Runner.login(new String[]{"", user, pass}) == true)
+            {
+                target = new URI("http://localhost:8081/index.html");
+                session.setAttribute("loggedIn", user);
+            } else
+            {
+                target = new URI("http://localhost:8081/login.html");
+            }
+            return Response.seeOther(target).build();
+        }
+        else
+        {
+            return Response.seeOther(new URI("http://localhost:8081/index.html")).build();
+        }
+    }
 }

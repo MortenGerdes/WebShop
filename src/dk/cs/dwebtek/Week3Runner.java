@@ -211,14 +211,16 @@ public class Week3Runner {
         }
     }
 
-    private static void login(String[] args) {
+    public static boolean login(String[] args) {
         OperationResult<Document> rawrXD = service.loginRequest(args[1], args[2]);
         if (rawrXD.isSuccess()) {
             System.out.println("Logged in succesfully on Customer: "
                     + rawrXD.getResult().getRootElement().getChild("customerName", CloudServiceSingleton.getInstance().NS).getText()
                     + " with customer ID: " + rawrXD.getResult().getRootElement().getChild("customerID", CloudServiceSingleton.getInstance().NS).getText());
+            return true;
         } else {
             System.out.println("Failed to login on " + args[1] + "\nMost likely due to wrong Username/password!");
+            return false;
         }
     }
 
