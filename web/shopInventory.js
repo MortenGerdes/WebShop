@@ -72,6 +72,12 @@ function addItemsToTable(items) {
     }
 }
 
+function addItemToSalesTable(items){
+
+    var productDiv = document.getElementById("area");
+
+}
+
 
 /////////////////////////////////////////////////////
 // Code from slides
