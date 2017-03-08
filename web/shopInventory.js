@@ -61,11 +61,16 @@ function addItemsToTable(items) {
         itemPricing.setAttribute("class", "pricetext");
         itemPricing.textContent = item.itemPrice + "$";
         itemPur.appendChild(itemPricing);
+        var theForm = document.createElement("form");
+        theForm.setAttribute("action", "rest/shop/addbasket?itemID=" + item.itemID);
+        theForm.setAttribute("method", "post");
+        itemPur.appendChild(theForm);
         var addToCart = document.createElement("input");
         addToCart.setAttribute("name", "addtocart");
         addToCart.setAttribute("type", "submit");
         addToCart.setAttribute("value", "Add to cart");
-        itemPur.appendChild(addToCart);
+        addToCart.setAttribute("onclick", "whenAddedToBasket()")
+        theForm.appendChild(addToCart);
 
         special.appendChild(itemPur);
         productDiv.appendChild(special);
@@ -75,6 +80,11 @@ function addItemsToTable(items) {
 function addItemToSalesTable(items){
 
     var productDiv = document.getElementById("area");
+
+}
+
+function whenAddedToBasket() {
+    alert("Item added to basket");
 
 }
 

@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Path("shop")
@@ -33,7 +34,6 @@ public class ShopService
     @Produces(MediaType.APPLICATION_JSON)
     public List<Item> getItems()
     {
-        System.out.println("test1");
         return CloudServiceSingleton.getInstance().itemsFromXMLToJava();
     }
 
@@ -80,4 +80,47 @@ public class ShopService
             return Response.seeOther(new URI("http://localhost:8081/index.html")).build();
         }
     }
+
+    public boolean isLoggedIn()
+    {
+        if(session.getAttribute("loggedIn") != null)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    @POST
+    @Path("addbasket")
+    public void saveToBasket(@QueryParam("itemID") int id)
+    {
+        saveToBasket(CloudServiceSingleton.getInstance().getItemByID(id));
+    }
+
+    public void saveToBasket(Item item)
+    {
+        List<Item> items = getCustomerBasket();
+        if(!items.contains(item))
+        {
+            items.add(item);
+            session.setAttribute((((String) session.getAttribute("loggedIn")) + "basket"), items);
+        }
+    }
+
+    @GET
+    @Path("getbasket")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Item> getCustomerBasket()
+    {
+        if(!isLoggedIn())
+        {
+            return null;
+        }
+        if(session.getAttribute(((String)session.getAttribute("loggedIn")) + "basket") == null)
+        {
+            session.setAttribute((((String)session.getAttribute("loggedIn")) + "basket"), new ArrayList<Item>());
+        }
+        return (List<Item>)session.getAttribute(((String)session.getAttribute("loggedIn")) + "basket");
+    }
+
 }
