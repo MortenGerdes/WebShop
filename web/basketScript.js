@@ -15,9 +15,9 @@ window.onload = function () {
         addItemsToBasket(basketList);
         storeItemAmount(basketList);
         storeAllPrices(basketList);
+        setTotalTotal();
     });
-    var yo = "button1"
-    console.debug(yo.substr(6, 7));
+
 }
 
 function addCustomerName(customerInfo) {
@@ -32,7 +32,6 @@ function storeItemAmount(basketList) {
 
 
 function addItemsToBasket(basketList) {
-    console.debug("TEST");
     //Remove all contents of the table body (if any exist)
     var table = document.getElementById("salesTable")
 
@@ -87,18 +86,41 @@ function addItemsToBasket(basketList) {
 
 
         var total = document.createElement("td");
-        total.setAttribute("id", "total"+i);
+        total.setAttribute("id", "total" + i);
         total.textContent = item.itemPrice;
         newRow.appendChild(total);
 
         table.appendChild(newRow);
     }
+
+    var buyNowBut = document.getElementById("buyNow");
+    buyNowBut.createElement("input");
+
 }
 
-function storeAllPrices(basketList){
+function setTotalTotal() {
+    var totalPrice = 0;
+    for (var i = 0; i < allPrices.length; i++) {
+
+        var total = document.getElementById("total" + i);
+
+
+        if (total.innerHTML == null) {
+            totalPrice += 0;
+        }
+        else {
+            totalPrice += parseInt(total.innerHTML);
+        }
+    }
+
+    var totalTotal = document.getElementById("totalTotal");
+    totalTotal.innerHTML = totalPrice;
+}
+
+function storeAllPrices(basketList) {
     var temp = [];
 
-    for(var i = 0; i<basketList.length; i++){
+    for (var i = 0; i < basketList.length; i++) {
         temp[i] = (basketList[i].itemPrice);
     }
     allPrices = temp;
@@ -111,12 +133,9 @@ function totalMult(index, amount) {
 
     var newTotal = allPrices[index] * amount;
 
-    console.debug("This is new total: " + allPrices[index]);
-
     total.textContent = "" + newTotal;
 
 }
-
 
 
 function increment(id) {
@@ -125,7 +144,6 @@ function increment(id) {
 
         var textField = document.getElementById("amountInt" + id.toString().substr(6, 7));
 
-        console.debug(id);
         var number = parseInt(textField.value);
         var numberInt = parseInt(number) + 1;
 
@@ -133,6 +151,7 @@ function increment(id) {
 
         //calls total multiplier function
         totalMult(id.toString().substr(6, 7), numberInt);
+        setTotalTotal();
 
     }
     else if (totalItems >= 10 && totalItems < 100) {
@@ -142,11 +161,11 @@ function increment(id) {
 
         textField.value = "" + numberInt;
         totalMult(id.toString().substr(6, 8), numberInt);
+        setTotalTotal();
     }
     else {
-        console.debug("LOL");
+        console.debug("LOL1")
     }
-
 
 
 }
@@ -159,12 +178,13 @@ function decrement(id) {
 
         var textField = document.getElementById("amountInt" + id.substr(7, 8));
         if (textField.value > 0) {
-            console.debug("amountInt" + id.substr(7, 8));
             var number = textField.value;
             var numberInt = parseInt(number) - 1;
 
             textField.value = "" + numberInt;
+
             totalMult(id.toString().substr(7, 8), numberInt);
+            setTotalTotal();
         }
     }
     else if (totalItems >= 10 && totalItems < 100) {
@@ -175,7 +195,9 @@ function decrement(id) {
             var numberInt = parseInt(number) - 1;
 
             textField.value = "" + numberInt;
+
             totalMult(id.toString().substr(7, 9), numberInt);
+            setTotalTotal();
         }
     }
     else {
