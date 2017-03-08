@@ -37,7 +37,7 @@ public class CloudService
     {
         // itemDescription is a string, possible with XML content. We have to transform it.
         OperationResult<Element> itemDescRes = convertItemDescription(itemDescription);
-        if(!itemDescRes.isSuccess())
+        if (!itemDescRes.isSuccess())
         {
             return OperationResult.Fail("Failed to add XML to itemdes");
         }
@@ -152,9 +152,9 @@ public class CloudService
     {
         Element customer = new Element("sellItems", NS);
         customer.addContent(new Element("shopKey", NS).setText(SHOP_KEY));
-        customer.addContent(new Element("itemID", NS).setText(""+itemID));
-        customer.addContent(new Element("customerID", NS).setText(""+customerID));
-        customer.addContent(new Element("saleAmount", NS).setText(""+saleAmount));
+        customer.addContent(new Element("itemID", NS).setText("" + itemID));
+        customer.addContent(new Element("customerID", NS).setText("" + customerID));
+        customer.addContent(new Element("saleAmount", NS).setText("" + saleAmount));
 
         Document doc = new Document();
         doc.setRootElement(customer);
@@ -166,7 +166,6 @@ public class CloudService
             return OperationResult.Fail(validate(doc).getMessage());
         }
     }
-
 
 
     /**
@@ -190,15 +189,12 @@ public class CloudService
             elem.detach();
             //doc.setRootElement(new Element("itemDescription", NS));
             return OperationResult.Success(elem);
-        }
-        catch (UnsupportedEncodingException e)
+        } catch (UnsupportedEncodingException e)
         {
-        }
-        catch (JDOMException e)
+        } catch (JDOMException e)
         {
             System.out.println("Failed to handle ItemDescription's XML in CovertItemDes Method");
-        }
-        catch (IOException e)
+        } catch (IOException e)
         {
         }
         System.out.println("Stuff happened that shouldn't in Cloudservice");
@@ -225,9 +221,9 @@ public class CloudService
 
     public String handleItemDes(Element child, String message)
     {
-        if(child.getChildren() != null)
+        if (child.getChildren() != null)
         {
-            for(Element elemChild: child.getChildren())
+            for (Element elemChild : child.getChildren())
             {
                 message += new XMLOutputter().outputString(elemChild);
                 handleItemDes(elemChild, message);
@@ -252,10 +248,10 @@ public class CloudService
         }
         for (Element item : xmlItems.getResult().getRootElement().getChildren("item", ns))
         {
-                if (containsId(deletedJavaItems, Integer.parseInt(item.getChildText("itemID", ns))))
-                {
-                    continue;
-                }
+            if (containsId(deletedJavaItems, Integer.parseInt(item.getChildText("itemID", ns))))
+            {
+                continue;
+            }
             Item javaItem = new Item();
             javaItem.setItemID(Integer.parseInt(item.getChildText("itemID", ns)));
             javaItem.setItemName(item.getChildText("itemName", ns));
@@ -292,19 +288,22 @@ public class CloudService
     {
         Customer cs = new Customer();
         OperationResult<Document> items = listCustomers();
-        if (items.isSuccess()) {
+        if (items.isSuccess())
+        {
             Document doc = items.getResult();
 
-            for (Element child : doc.getRootElement().getChildren()) {
+            for (Element child : doc.getRootElement().getChildren())
+            {
                 String pastId = "";
-                for (Element child2 : child.getChildren()) {
-                    if(child2.getText().equals(name) && child2.getName() == "customerName")
+                for (Element child2 : child.getChildren())
+                {
+                    if (child2.getText().equals(name) && child2.getName() == "customerName")
                     {
                         cs.setName(child2.getText());
                         cs.setId(pastId);
                         cs.setSales(salesFromXMLToJava(Integer.parseInt(pastId)));
                     }
-                    if(child2.getName() == "customerID")
+                    if (child2.getName() == "customerID")
                     {
                         pastId = child2.getText();
                     }
@@ -324,6 +323,20 @@ public class CloudService
             }
         }
         return false;
+    }
+
+    public Item getItemByID(int id)
+    {
+        List<Item> items = itemsFromXMLToJava();
+
+        for(Item item: items)
+        {
+            if (item.getItemID() == id)
+            {
+                return item;
+            }
+        }
+        return null;
     }
 
     public String handleItemDes(Element child)
@@ -419,9 +432,10 @@ public class CloudService
         return CloudComm.performRequest(new SellItemRequest(createBodyForSellItem(itemID, customerID, saleAmount).getResult()));
     }
 
-    public OperationResult<Document> listCustomerSales(int customerID){
+    public OperationResult<Document> listCustomerSales(int customerID)
+    {
         return CloudComm.performRequest(new ListCustomerSalesRequest(customerID));
-}
+    }
 
     public OperationResult<Document> listShopSales(String shopKey)
     {
