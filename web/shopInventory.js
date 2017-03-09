@@ -15,9 +15,8 @@ window.onload = function () {
                 loggedIn()
             }
         })
-    }, 300);
+    }, 1000);
 };
-
 
 var oldQuery = "";
 function updateItemsFromSearch() {
