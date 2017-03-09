@@ -55,6 +55,8 @@ public class ShopService {
         return cs.salesFromXMLToJava(Integer.parseInt(getLoggedInCustomer().getId()));
     }
 
+
+
     @POST
     @Path("login")
     @Consumes(MediaType.WILDCARD)

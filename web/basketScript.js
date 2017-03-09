@@ -108,7 +108,14 @@ function addItemsToBasket(basketList) {
     var buyNowBut = document.createElement("input");
     buyNowBut.setAttribute("type", "button");
     buyNowBut.setAttribute("value", "Buy Now");
+    buyNowBut.setAttribute("onclick", "buyConfirmed()");
     buyNowRow.appendChild(buyNowBut);
+}
+
+function buyConfirmed(){
+    alert("Your purchase has been confirmed");
+
+    window.location.replace("http://localhost:8081/index.html");
 }
 
 function setTotalTotal() {
