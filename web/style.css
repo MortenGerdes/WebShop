@@ -1,6 +1,10 @@
 body
 {
-    background-color: white;
+    background: #f0f0f0;
+    font-family: Arial;
+
+
+
 
 }
 
@@ -38,7 +42,7 @@ img
 {
     font-family: Arial;
     float: left;
-    margin: 30px;
+    margin: 0.5%;
     width: 12%;
     max-width: 400px;
     min-width: 100px;
@@ -50,11 +54,16 @@ img
 .productdisplayarea
 {
     margin-top: 15px;
-    width: auto;
+    width: 92%;
     float: right;
     max-width: 78%;
     background-color: white;
 
+}
+
+#area{
+    float: left;
+    background: #f0f0f0;
 }
 
 .specificproductouter
@@ -109,6 +118,10 @@ img
     float: left;
 }
 
+#companyName{
+    padding-left: 2%;
+    padding-top:1%;
+}
 
 input[name="addtocart"]
 {
@@ -127,5 +140,5 @@ input[name="addtocart"]
 .padding
 
 #searchOption{
-    padding-top: 20px;
+    padding-top: 40px;
 }
