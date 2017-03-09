@@ -7,19 +7,31 @@ function login() {
     var userName = document.getElementById("username").value;
     var pass = document.getElementById("pass").value;
     console.log("Username: " + userName + " Password: " + pass);
-    var cusInfo ={"userName": userName, "passWord": pass};
+    var cusInfo = {"userName": userName, "passWord": pass};
     console.log(cusInfo);
 
-    sendRequest("POST", "rest/shop/login", JSON.stringify(cusInfo),function (response) {
-        if (response == "OK")
+    sendRequest("POST", "rest/shop/login", JSON.stringify(cusInfo), function (response) {
+        if (response == "OK") {
             alert("logged in");
-                // document.getElementById("logInButton").innerHTML="";
-        if (response == "ACTIVE")
+            logedIn();
+        }
+        else if (response == "ACTIVE") {
             alert("Already logged in!");
-        else{
+            logedIn();
+        }
+        else {
             alert("Wrong username or password (Or server is busy)");
         }
-    } )
+    })
+
+}
+//abe
+function logedIn() {
+    var logInField = document.getElementById("logInButton").innerHTML = "";
+    var thePic = document.createElement("img");
+    thePic.setAttribute("src", "https://media-cdn.tripadvisor.com/media/photo-s/01/90/78/c5/sunset-over-dinner-nice.jpg");
+    thePic.setAttribute("alt", "A picture of the product");
+    logInField.appendChild(thePic);
 }
 
 function toCreateUser() {
