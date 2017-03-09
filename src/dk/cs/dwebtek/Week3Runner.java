@@ -56,6 +56,8 @@ public class Week3Runner {
                 break;
             case "listCustomerSales":
                 listCustomerSales(args);
+            case "listShops":
+                listShops();
                 break;
 
             default:
@@ -89,6 +91,24 @@ public class Week3Runner {
             System.out.println("Invalid number inserted. Make sure the ID writting is actually in the list of items and that price a positive number");
         }
 
+    }
+
+    private static void listShops(){
+        OperationResult<Document> shops = service.listShops();
+
+        if(shops.isSuccess()){
+            Document doc = shops.getResult();
+
+            for(Element child : doc.getRootElement().getChildren()){
+
+                System.out.println();
+                for(Element child2 : child.getChildren()){
+                    System.out.println(child2.getName() + " = " + child2.getText() + ", ");
+                }
+
+            }
+            System.out.println();
+        }
     }
 
     private static void listItems(String shopID) {

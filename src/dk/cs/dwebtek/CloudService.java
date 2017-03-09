@@ -10,6 +10,7 @@ import org.jdom2.input.sax.XMLReaderJDOMFactory;
 import org.jdom2.input.sax.XMLReaderXSDFactory;
 import org.jdom2.output.XMLOutputter;
 
+import javax.print.Doc;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -233,6 +234,24 @@ public class CloudService
         return message;
     }
 
+    public List<Shop> shopsFromXMLToJava(){
+        Namespace ns = CloudServiceSingleton.getInstance().NS;
+        List<Shop> javaItems = new ArrayList<>();
+        OperationResult<Document> xmlShops = CloudServiceSingleton.getInstance().listShops();
+
+        for(Element shop : xmlShops.getResult().getRootElement().getChildren("shop", ns)){
+            Shop javaShop = new Shop();
+
+            javaShop.setShopID(shop.getChildText("shopID", ns));
+            javaShop.setShopName(shop.getChildText("shopName", ns));
+            javaShop.setShopURL(shop.getChildText("shopURL", ns));
+
+            javaItems.add(javaShop);
+        }
+
+        return javaItems;
+    }
+
     public List<Item> itemsFromXMLToJava()
     {
         Namespace ns = CloudServiceSingleton.getInstance().NS;
@@ -414,6 +433,10 @@ public class CloudService
     public OperationResult<Document> modifyItem(int itemID, String itemName, int itemPrice, String itemUrl, String itemDescriptionXml)
     {
         return CloudComm.performRequest(new ModifyItemRequest(createBodyForModifyItem(itemID, itemName, itemPrice, itemUrl, itemDescriptionXml).getResult()));
+    }
+
+    public OperationResult<Document> listShops(){
+        return CloudComm.performRequest(new ListShopsRequest());
     }
 
     public OperationResult<Document> adjustItemStock(int itemID, int adjustment)

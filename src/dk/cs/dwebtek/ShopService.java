@@ -55,6 +55,15 @@ public class ShopService {
         return cs.salesFromXMLToJava(Integer.parseInt(getLoggedInCustomer().getId()));
     }
 
+    @GET
+    @Path("shopList")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Shop> getShopList(){
+        CloudService cs = new CloudService();
+
+        return cs.shopsFromXMLToJava();
+    }
+
 
 
     @POST
