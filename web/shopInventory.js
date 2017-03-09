@@ -54,6 +54,10 @@ function addItemsToTable(items) {
     //Loop through the items from the server
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
+
+        if(item.itemStock == 0){
+            continue;
+        }
         //Create a new line for this item
         var special = document.createElement("div");
         special.setAttribute("class", "specificproductouter");
@@ -68,7 +72,6 @@ function addItemsToTable(items) {
         itemPicDiv.appendChild(thePic);
         var itemTitle = document.createElement("div");
         itemTitle.setAttribute("class", "producttitle");
-        itemTitle.textContent = item.itemName;
         special.appendChild(itemTitle);
 
         var itemDes = document.createElement("div");
@@ -82,6 +85,7 @@ function addItemsToTable(items) {
         itemPricing.setAttribute("class", "pricetext");
         itemPricing.textContent = item.itemPrice + "$";
         itemPur.appendChild(itemPricing);
+        itemPur.innerHTML += "Stock: " + item.itemStock;
         var theForm = document.createElement("form");
         theForm.setAttribute("action", "rest/shop/addbasket?itemID=" + item.itemID);
         theForm.setAttribute("method", "post");
