@@ -12,15 +12,20 @@ window.onload = function () {
 
     sendRequest("GET", "rest/shop/getbasket", null, function (basket) {
         var basketList = JSON.parse(basket);
-        addItemsToBasket(basketList);
-        storeItemAmount(basketList);
-        storeAllPrices(basketList);
-        setTotalTotal();
+
+        if(basketList.length == 0){
+            var noItemsMessage = document.getElementById("headerID");
+            noItemsMessage.textContent = "You have no items in your basket";
+        }
+        else{
+            addItemsToBasket(basketList);
+            storeItemAmount(basketList);
+            storeAllPrices(basketList);
+            setTotalTotal();
+        }
     });
 
-    if(allPrices.length < 0){
 
-    }
 
 }
 
@@ -88,7 +93,6 @@ function addItemsToBasket(basketList) {
         price.textContent = item.itemPrice;
         newRow.appendChild(price);
 
-
         var total = document.createElement("td");
         total.setAttribute("id", "total" + i);
         total.textContent = item.itemPrice;
@@ -97,7 +101,7 @@ function addItemsToBasket(basketList) {
         table.appendChild(newRow);
     }
 
-    var buyNowRow = document.getElementById("buyNow");
+    var buyNowRow = document.getElementById("buyNowRow");
     var buyNowBut = document.createElement("input");
     buyNowBut.setAttribute("type", "button");
     buyNowBut.setAttribute("value", "Buy Now");
