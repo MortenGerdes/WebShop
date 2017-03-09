@@ -13,26 +13,28 @@
 
 <div class="headline">
     <div id="companyName">
-        Amazing<br>Games
+        <div>
+            Amazing<br>Games
+        </div>
     </div>
     <div id="logInButton">
         <table>
-                <tr>
-                    <td>Brugernavn:</td>
-                    <td><input type="text" name="username" id="username"></td>
-                </tr>
-                <tr>
-                    <td>Adgangskode:</td>
-                    <td><input type="password" name="password" id="pass"></td>
-                </tr>
+            <tr>
+                <td>Brugernavn:</td>
+                <td><input type="text" name="username" id="username"></td>
+            </tr>
+            <tr>
+                <td>Adgangskode:</td>
+                <td><input type="password" name="password" id="pass"></td>
+            </tr>
 
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="submit" name="LogInButton" value="Log Ind" onclick="login()">
-                        <input type="submit" name="CreateCustomer" value="Ny Bruger" onclick="toCreateUser()">
-                    </td>
-                </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" name="LogInButton" value="Log Ind" onclick="login()">
+                    <input type="submit" name="CreateCustomer" value="Ny Bruger" onclick="toCreateUser()">
+                </td>
+            </tr>
         </table>
     </div>
 </div>
@@ -40,6 +42,7 @@
 <p id="welcomeMessage"></p>
 
 <div class="controlpanel">
+    <br/>
     <b id="searchOption">Search options:</b> <br><br>
     <form class="form">
         <input type="checkbox" name="shopoption" value="">Sort by price<br>
@@ -52,30 +55,31 @@
     </form>
 </div>
 
-<div id="area" class="productdisplayarea">
-
-    <div class="specificproductouter">
-        <div class="productpic">
-            <!-- Product picture -->
-            <img src="https://s-media-cache-ak0.pinimg.com/originals/4f/55/06/4f55064f1bf8d7c83ac4e11216992dd5.jpg"
-                 alt="Cover art of the game">
-        </div>
-
-        <div class="producttitle">
-            Infinite Redemption
-        </div>
-
-        <div class="productinfo">
-            In a world, where hamsters dominate the globe, a lonely emo teenage dwarf hamster struggles on a salary
-            <em>below</em> minimum wage. Fix it.
-        </div>
-
-        <div class="productpurchase">
-            <div class="pricetext">
-                20$
+<div class="productdisplayarea">
+    <div id="area">
+        <div class="specificproductouter">
+            <div class="productpic">
+                <!-- Product picture -->
+                <img src="https://s-media-cache-ak0.pinimg.com/originals/4f/55/06/4f55064f1bf8d7c83ac4e11216992dd5.jpg"
+                     alt="Cover art of the game">
             </div>
 
-            <input name="addtocart" type="submit" value="Add to Cart">
+            <div class="producttitle">
+                Infinite Redemption
+            </div>
+
+            <div class="productinfo">
+                In a world, where hamsters dominate the globe, a lonely emo teenage dwarf hamster struggles on a salary
+                <em>below</em> minimum wage. Fix it.
+            </div>
+
+            <div class="productpurchase">
+                <div class="pricetext">
+                    20$
+                </div>
+
+                <input name="addtocart" type="submit" value="Add to Cart">
+            </div>
         </div>
     </div>
 </div>

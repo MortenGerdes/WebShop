@@ -11,7 +11,7 @@
 
 #topbar {
     background: #4f4a41;
-    /*padding: 10px 0 10px 0;*/
+    padding: 15px 0 10px 0;
     text-align: center;
     height: 36px;
     overflow: hidden;
@@ -92,4 +92,8 @@ tr:nth-child(even) {
 
 input {
     size: 5px;
+}
+
+a{
+    padding-top: 15px;
 }
