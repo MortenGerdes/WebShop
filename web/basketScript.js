@@ -120,21 +120,31 @@ function addItemsToBasket(basketList) {
 function buyConfirmed() {
 
     alert("Your purchase has been confirmed");
+    var delay = 300;
     sendRequest("GET", "rest/shop/getbasket", null, function (basket) {
         var basketList = JSON.parse(basket);
+
         for (var i = 0; i < basketList.length; i++) {
+            var item = basketList[i];
+            delay += 500; // Increase delay every run
+            var textField = document.getElementById("amountInt" + i);
+            var number = parseInt(textField.value);
+            item["wantedToSell"] = number;
 
-            console.log(basketList[i]);
-
+            console.log("Timeout: " + delay);
+            setTimeout(buyItem(item), delay);
         }
-
     });
     setTimeout(function () {
         sendRequest("GET", "rest/shop/clearBasket", null, function () {
-            window.location.replace("http://localhost:8081/index.html");
         });
-    },100);
+    },delay);
+}
 
+function buyItem(item) {
+    sendRequest("POST", "rest/shop/sellItem", JSON.stringify(item), function(rawr) {
+        console.log("Bought shet");
+    });
 }
 
 function setTotalTotal() {

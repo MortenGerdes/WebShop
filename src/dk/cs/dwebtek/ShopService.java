@@ -122,8 +122,7 @@ public class ShopService {
     @Path("verifypurchase")
     public void verifyPurchase()
     {
-        List<Item> allItems = CloudServiceSingleton.getInstance().itemsFromXMLToJava();
-        List<Item> toBuyItems = getCustomerBasket();
+
     }
 
     @GET
@@ -133,6 +132,16 @@ public class ShopService {
         System.out.println("Cleared basket");
     }
 
+    @POST
+    @Path("sellItem")
+    @Consumes(MediaType.WILDCARD)
+    public void sellItemsInBasket(String x)
+    {
+        JSONObject cusInfo = new JSONObject(x);
+        int itemID = cusInfo.getInt("itemID");
+        int saleAmount = cusInfo.getInt("wantedToSell");
+        CloudServiceSingleton.getInstance().sellItem(itemID, Integer.parseInt(getLoggedInCustomer().getId()), saleAmount);
+    }
 
     @POST
     @Path("newCustomer")
