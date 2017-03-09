@@ -261,8 +261,8 @@ public class CloudService
         Namespace ns = CloudServiceSingleton.getInstance().NS;
         List<Item> javaItems = new ArrayList<>();
         List<Item> deletedJavaItems = new ArrayList<>();
-        OperationResult<Document> xmlItems = CloudServiceSingleton.getInstance().listItems("shopID");
-        OperationResult<Document> deletedXMLItems = CloudServiceSingleton.getInstance().listDeletedItems("shopID");
+        OperationResult<Document> xmlItems = CloudServiceSingleton.getInstance().listItems("303");
+        OperationResult<Document> deletedXMLItems = CloudServiceSingleton.getInstance().listDeletedItems("303");
         for (Element child : deletedXMLItems.getResult().getRootElement().getChildren())
         {
             Item javaItem = new Item();

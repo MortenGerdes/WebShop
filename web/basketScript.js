@@ -119,30 +119,43 @@ function addItemsToBasket(basketList) {
 
 function buyConfirmed() {
 
-    alert("Your purchase has been confirmed");
     var delay = 300;
     sendRequest("GET", "rest/shop/getbasket", null, function (basket) {
         var basketList = JSON.parse(basket);
-
         for (var i = 0; i < basketList.length; i++) {
             var item = basketList[i];
-            delay += 500; // Increase delay every run
             var textField = document.getElementById("amountInt" + i);
             var number = parseInt(textField.value);
             item["wantedToSell"] = number;
 
             console.log("Timeout: " + delay);
-            setTimeout(buyItem(item), delay);
+            console.log(item);
+            buyItem(item);
         }
     });
+
+    alert("Your purchase has been confirmed");
+
     setTimeout(function () {
         sendRequest("GET", "rest/shop/clearBasket", null, function () {
         });
-    },delay);
+    }, delay);
+
+    setTimeout(function () {
+        window.location.replace("/index.html");
+    }, delay+100)
+
+}
+
+function clearBasket() {
+    sendRequest("GET", "rest/shop/clearBasket", null, function (){
+    });
+    alert("Basket Cleared!");
+    window.location.replace("/index.html")
 }
 
 function buyItem(item) {
-    sendRequest("POST", "rest/shop/sellItem", JSON.stringify(item), function(rawr) {
+    sendRequest("POST", "rest/shop/sellItem", JSON.stringify(item), function (rawr) {
         console.log("Bought shet");
     });
 }
@@ -193,8 +206,7 @@ function increment(id) {
     if (totalItems < 10) {
         var textField = document.getElementById("amountInt" + id.toString().substr(6, 7));
         var number = parseInt(textField.value);
-        if(document.getElementById("maxAmount" + id.toString().substr(6, 7)).innerHTML <= number)
-        {
+        if (document.getElementById("maxAmount" + id.toString().substr(6, 7)).innerHTML <= number) {
             return;
         }
         var numberInt = parseInt(number) + 1;
@@ -209,8 +221,7 @@ function increment(id) {
     else if (totalItems >= 10 && totalItems < 100) {
         var textField = document.getElementById("amountInt" + id.substr(6, 8));
         var number = parseInt(textField.value);
-        if(document.getElementById("maxAmount" + id.substr(6, 8)).innerHTML <= number)
-        {
+        if (document.getElementById("maxAmount" + id.substr(6, 8)).innerHTML <= number) {
             return;
         }
         var numberInt = parseInt(number) + 1;
