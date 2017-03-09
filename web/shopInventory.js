@@ -72,6 +72,7 @@ function addItemsToTable(items) {
         itemPicDiv.appendChild(thePic);
         var itemTitle = document.createElement("div");
         itemTitle.setAttribute("class", "producttitle");
+        itemTitle.innerHTML = item.itemName;
         special.appendChild(itemTitle);
 
         var itemDes = document.createElement("div");
@@ -85,7 +86,6 @@ function addItemsToTable(items) {
         itemPricing.setAttribute("class", "pricetext");
         itemPricing.textContent = item.itemPrice + "$";
         itemPur.appendChild(itemPricing);
-        itemPur.innerHTML += "Stock: " + item.itemStock;
         var theForm = document.createElement("form");
         theForm.setAttribute("action", "rest/shop/addbasket?itemID=" + item.itemID);
         theForm.setAttribute("method", "post");
@@ -93,8 +93,9 @@ function addItemsToTable(items) {
         var addToCart = document.createElement("input");
         addToCart.setAttribute("name", "addtocart");
         addToCart.setAttribute("type", "submit");
-        addToCart.setAttribute("value", "Add to cart");
+        addToCart.setAttribute("value", "Add to cart " + "("+item.itemStock+" left)");
         addToCart.setAttribute("onclick", "whenAddedToBasket()")
+        addToCart.innerHTML += "Stock: " + item.itemStock;
         theForm.appendChild(addToCart);
 
         special.appendChild(itemPur);
