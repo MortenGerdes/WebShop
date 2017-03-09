@@ -252,13 +252,17 @@ public class CloudService
         return javaItems;
     }
 
-    public List<Item> itemsFromXMLToJava()
+    public List<Item> itemsFromXMLToJava(){
+        return itemsFromXMLToJava("303");
+    }
+
+    public List<Item> itemsFromXMLToJava(String shopID)
     {
         Namespace ns = CloudServiceSingleton.getInstance().NS;
         List<Item> javaItems = new ArrayList<>();
         List<Item> deletedJavaItems = new ArrayList<>();
-        OperationResult<Document> xmlItems = CloudServiceSingleton.getInstance().listItems("303");
-        OperationResult<Document> deletedXMLItems = CloudServiceSingleton.getInstance().listDeletedItems("303");
+        OperationResult<Document> xmlItems = CloudServiceSingleton.getInstance().listItems("shopID");
+        OperationResult<Document> deletedXMLItems = CloudServiceSingleton.getInstance().listDeletedItems("shopID");
         for (Element child : deletedXMLItems.getResult().getRootElement().getChildren())
         {
             Item javaItem = new Item();
