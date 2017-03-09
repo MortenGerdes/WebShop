@@ -42,14 +42,14 @@ function loggedIn() {
     thePic2.setAttribute("alt", "A picture of a person");
     thePic2.setAttribute("style", "width: 75px; height: 75px;");
     reDirect2.appendChild(thePic2);
-
-         logInField.appendChild(reDirect);
+    logInField.appendChild(reDirect);
+    logInField.appendChild(reDirect2);
 
     var logOut = document.createElement("input");
     logOut.setAttribute("type", "submit");
     logOut.setAttribute("value", "Log Ud");
     logOut.setAttribute("onclick", "logOut()");
-    logOut.setAttribute("style", "display: block;");
+    logOut.setAttribute("style", "display:block; width:150px;");
     console.log(logOut);
     logInField.appendChild(logOut);
 }

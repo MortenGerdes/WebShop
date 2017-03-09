@@ -83,8 +83,7 @@ public class ShopService {
         {
             saveToBasket(CloudServiceSingleton.getInstance().getItemByID(id));
         }
-    public void saveToBasket(@QueryParam("itemID") int id) {
-        saveToBasket(CloudServiceSingleton.getInstance().getItemByID(id));
+
     }
 
     public void saveToBasket(Item item) {
