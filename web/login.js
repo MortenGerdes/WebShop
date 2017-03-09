@@ -23,20 +23,23 @@ function login() {
             alert("Wrong username or password (Or server is busy)");
         }
     })
-
 }
 //abe
 function logedIn() {
-    var logInField = document.getElementById("logInButton").innerHTML = "";
+    var logInField = document.getElementById("logInButton");
+    var logInFieldValue = logInField.innerHTML = "";
+    var reDirect = document.createElement("a");
+    reDirect.setAttribute("href", "http://localhost:8081/basket.html");
     var thePic = document.createElement("img");
-    thePic.setAttribute("src", "https://media-cdn.tripadvisor.com/media/photo-s/01/90/78/c5/sunset-over-dinner-nice.jpg");
-    thePic.setAttribute("alt", "A picture of the product");
-    logInField.appendChild(thePic);
+    thePic.setAttribute("src", "https://cdn4.iconfinder.com/data/icons/greicons-2/1052/CARRITO-512.png");
+    thePic.setAttribute("alt", "A picture of a basket");
+    thePic.setAttribute("style", "width: 75px; height: 75px;");
+    reDirect.appendChild(thePic);
+    logInField.appendChild(reDirect);
 }
 
 function toCreateUser() {
     window.location.replace("http://localhost:8081/createAccount.html");
-
 }
 
 ////
