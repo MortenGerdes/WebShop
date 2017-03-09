@@ -90,7 +90,7 @@ public class ShopService {
 
     public void saveToBasket(Item item) {
         List<Item> items = getCustomerBasket();
-        if (!items.contains(item)) {
+        if (!CloudServiceSingleton.getInstance().containsId(items, item.getItemID())) {
             items.add(item);
             session.setAttribute((((String) session.getAttribute("loggedIn")) + "basket"), items);
         }

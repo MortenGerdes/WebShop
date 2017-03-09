@@ -117,17 +117,19 @@ function buyConfirmed() {
     alert("Your purchase has been confirmed");
     sendRequest("GET", "rest/shop/getbasket", null, function (basket) {
         var basketList = JSON.parse(basket);
-
-        console.log("!");
-        console.log(basketList.length);
         for (var i = 0; i < basketList.length; i++) {
+
             console.log(basketList[i]);
+
         }
 
     });
-    sendRequest("GET", "rest/shop/clearBasket", null, function () {
-        window.location.replace("http://localhost:8081/index.html");
-    });
+    setTimeout(function () {
+        sendRequest("GET", "rest/shop/clearBasket", null, function () {
+            window.location.replace("http://localhost:8081/index.html");
+        });
+    },100);
+
 }
 
 function setTotalTotal() {
