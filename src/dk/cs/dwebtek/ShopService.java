@@ -55,6 +55,15 @@ public class ShopService {
         return cs.salesFromXMLToJava(Integer.parseInt(getLoggedInCustomer().getId()));
     }
 
+    @GET
+    @Path("shopList")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Shop> getShopList(){
+        CloudService cs = new CloudService();
+
+        return cs.shopsFromXMLToJava();
+    }
+
 
 
     @POST
@@ -107,6 +116,14 @@ public class ShopService {
             session.setAttribute((((String) session.getAttribute("loggedIn")) + "basket"), new ArrayList<Item>());
         }
         return (List<Item>) session.getAttribute(((String) session.getAttribute("loggedIn")) + "basket");
+    }
+
+    @GET
+    @Path("verifypurchase")
+    public void verifyPurchase()
+    {
+        List<Item> allItems = CloudServiceSingleton.getInstance().itemsFromXMLToJava();
+        List<Item> toBuyItems = getCustomerBasket();
     }
 
     @GET
@@ -163,5 +180,10 @@ public class ShopService {
         System.out.println("logger ud");
         session.setAttribute("loggedIn", null);
         return true;
+    }
+
+    public boolean verifyBuyAblility(Item item, int toBuy)
+    {
+        return item.getItemStock() >= toBuy;
     }
 }
