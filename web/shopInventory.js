@@ -55,6 +55,7 @@ function addItemsToTable(items) {
     for (var i = 0; i < items.length; i++) {
         var item = items[i];
         //Create a new line for this item
+
         var special = document.createElement("div");
         special.setAttribute("class", "specificproductouter");
 
