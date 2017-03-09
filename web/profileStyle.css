@@ -1,6 +1,4 @@
-h1{
-    padding-left: 30px;
-}
+
 
 #topbar a {
     color: #fff;
@@ -88,7 +86,9 @@ tr:nth-child(even) {
     width: 15%;
 }
 
-
+#previousSales{
+    padding: 30px;
+}
 
 input {
     size: 5px;

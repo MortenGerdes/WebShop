@@ -90,11 +90,13 @@ function addItemsToBasket(basketList) {
         newRow.appendChild(amount);
 
         var price = document.createElement("td");
+        price.setAttribute("class", "priceRow");
         price.textContent = item.itemPrice;
         newRow.appendChild(price);
 
 
         var total = document.createElement("td");
+        total.setAttribute("class", "totalRow");
         total.setAttribute("id", "total" + i);
         total.textContent = item.itemPrice;
         newRow.appendChild(total);
