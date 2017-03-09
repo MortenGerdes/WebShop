@@ -119,6 +119,14 @@ public class ShopService {
     }
 
     @GET
+    @Path("verifypurchase")
+    public void verifyPurchase()
+    {
+        List<Item> allItems = CloudServiceSingleton.getInstance().itemsFromXMLToJava();
+        List<Item> toBuyItems = getCustomerBasket();
+    }
+
+    @GET
     @Path("clearBasket")
     public void clearBasket(){
         session.setAttribute((((String) session.getAttribute("loggedIn")) + "basket"), new ArrayList<Item>());;
@@ -172,5 +180,10 @@ public class ShopService {
         System.out.println("logger ud");
         session.setAttribute("loggedIn", null);
         return true;
+    }
+
+    public boolean verifyBuyAblility(Item item, int toBuy)
+    {
+        return item.getItemStock() >= toBuy;
     }
 }

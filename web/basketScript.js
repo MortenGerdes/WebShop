@@ -61,6 +61,11 @@ function addItemsToBasket(basketList) {
         itemDes.innerHTML = item.itemDescription;
         newRow.appendChild(itemDes);
 
+        var maxAmount = document.createElement("td");
+        maxAmount.setAttribute("id", "maxAmount" + i);
+        maxAmount.innerHTML = item.itemStock;
+        newRow.appendChild(maxAmount);
+
         var amount = document.createElement("td");
         amount.setAttribute("class", "amountRow");
         amount.textContent = "";
@@ -174,11 +179,14 @@ function totalMult(index, amount) {
 
 function increment(id) {
 
+
     if (totalItems < 10) {
-
         var textField = document.getElementById("amountInt" + id.toString().substr(6, 7));
-
         var number = parseInt(textField.value);
+        if(document.getElementById("maxAmount" + id.toString().substr(6, 7)).innerHTML <= number)
+        {
+            return;
+        }
         var numberInt = parseInt(number) + 1;
 
         textField.value = "" + numberInt;
@@ -191,6 +199,10 @@ function increment(id) {
     else if (totalItems >= 10 && totalItems < 100) {
         var textField = document.getElementById("amountInt" + id.substr(6, 8));
         var number = parseInt(textField.value);
+        if(document.getElementById("maxAmount" + id.substr(6, 8)).innerHTML <= number)
+        {
+            return;
+        }
         var numberInt = parseInt(number) + 1;
 
         textField.value = "" + numberInt;
