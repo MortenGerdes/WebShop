@@ -13,11 +13,11 @@ window.onload = function () {
     sendRequest("GET", "rest/shop/getbasket", null, function (basket) {
         var basketList = JSON.parse(basket);
 
-        if(basketList.length == 0){
+        if (basketList.length == 0) {
             var noItemsMessage = document.getElementById("headerID");
             noItemsMessage.textContent = "You have no items in your basket";
         }
-        else{
+        else {
             addItemsToBasket(basketList);
             storeItemAmount(basketList);
             storeAllPrices(basketList);
@@ -112,10 +112,24 @@ function addItemsToBasket(basketList) {
     buyNowRow.appendChild(buyNowBut);
 }
 
-function buyConfirmed(){
-    alert("Your purchase has been confirmed");
+function buyConfirmed() {
 
-    window.location.replace("http://localhost:8081/index.html");
+    alert("Your purchase has been confirmed");
+    sendRequest("GET", "rest/shop/getbasket", null, function (basket) {
+        var basketList = JSON.parse(basket);
+        for (var i = 0; i < basketList.length; i++) {
+
+            console.log(basketList[i]);
+
+        }
+
+    });
+    setTimeout(function () {
+        sendRequest("GET", "rest/shop/clearBasket", null, function () {
+            window.location.replace("http://localhost:8081/index.html");
+        });
+    },100);
+
 }
 
 function setTotalTotal() {
