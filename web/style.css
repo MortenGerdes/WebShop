@@ -117,11 +117,13 @@ input[name="addtocart"]
 
 .form{
     font-family: Arial;
-    width: 12%;
+
 
     padding-left: 4%;
     padding-top: 8%;
 }
+
+.padding
 
 #searchOption{
     padding-top: 20px;
