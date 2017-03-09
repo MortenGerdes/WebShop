@@ -87,7 +87,10 @@ public class ShopService
     @Path("addbasket")
     public void saveToBasket(@QueryParam("itemID") int id)
     {
-        saveToBasket(CloudServiceSingleton.getInstance().getItemByID(id));
+        if(isLoggedIn())
+        {
+            saveToBasket(CloudServiceSingleton.getInstance().getItemByID(id));
+        }
     }
 
     public void saveToBasket(Item item)

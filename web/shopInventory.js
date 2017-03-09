@@ -106,7 +106,15 @@ function addItemToSalesTable(items) {
 }
 
 function whenAddedToBasket() {
-    alert("Item added to basket");
+    sendRequest("GET", "rest/shop/isLoggedIn", null, function (response) {
+        if (response == "true") {
+            alert("Item added to basket");
+        }
+        else
+        {
+            alert("Please login before adding to basket!");
+        }
+    })
 }
 
 /////////////////////////////////////////////////////
