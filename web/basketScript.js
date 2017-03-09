@@ -62,7 +62,9 @@ function addItemsToBasket(basketList) {
         newRow.appendChild(itemDes);
 
         var amount = document.createElement("td");
+        amount.setAttribute("class", "amountRow");
         amount.textContent = "";
+
 
         var decrementBut = document.createElement("input");
         decrementBut.setAttribute("type", "button");
