@@ -25,8 +25,6 @@ window.onload = function () {
         }
     });
 
-
-
 }
 
 function addCustomerName(customerInfo) {
@@ -42,7 +40,7 @@ function storeItemAmount(basketList) {
 
 function addItemsToBasket(basketList) {
     //Remove all contents of the table body (if any exist)
-    var table = document.getElementById("salesTable")
+    var table = document.getElementById("salesTable");
 
     //Loop through the items from the server
     for (var i = 0; i < basketList.length; i++) {
@@ -64,7 +62,9 @@ function addItemsToBasket(basketList) {
         newRow.appendChild(itemDes);
 
         var amount = document.createElement("td");
+        amount.setAttribute("class", "amountRow");
         amount.textContent = "";
+
 
         var decrementBut = document.createElement("input");
         decrementBut.setAttribute("type", "button");
@@ -90,11 +90,13 @@ function addItemsToBasket(basketList) {
         newRow.appendChild(amount);
 
         var price = document.createElement("td");
+        price.setAttribute("class", "priceRow");
         price.textContent = item.itemPrice;
         newRow.appendChild(price);
 
 
         var total = document.createElement("td");
+        total.setAttribute("class", "totalRow");
         total.setAttribute("id", "total" + i);
         total.textContent = item.itemPrice;
         newRow.appendChild(total);
@@ -175,7 +177,7 @@ function increment(id) {
         setTotalTotal();
     }
     else {
-        console.debug("LOL1")
+        console.debug("LOL1");
     }
 
 

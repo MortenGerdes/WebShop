@@ -1,6 +1,4 @@
-h1{
-    padding-left: 30px;
-}
+
 
 #topbar a {
     color: #fff;
@@ -28,6 +26,7 @@ h1{
     margin-left: 10px;
     margin-bottom: 8px;
     padding-right: 40px;
+
 }
 
 body {
@@ -41,10 +40,11 @@ body {
 #tableDiv{
     padding-top: 30px;
     padding-left: 30px;
+
 }
 
 table {
-    width: 90%;
+    width: 75%;
     border: 1px solid black;
     font-family: arial;
     font-size: medium;
@@ -74,13 +74,22 @@ tr:nth-child(even) {
     background-color: #f2f2f2
 }
 
-/*
-img
-{
-    width: 180px;
-    height: 254px;
+.amountRow{
+    width: 10%;
 }
-*/
+
+.priceRow{
+    width: 10%;
+}
+
+.totalRow{
+    width: 15%;
+}
+
+#previousSales{
+    padding: 30px;
+}
+
 input {
     size: 5px;
 }

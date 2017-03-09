@@ -20,7 +20,6 @@ function initCusSales()
         var items = JSON.parse(customerSales);
         addItemsToSalesTable(items);
     });
-
 }
 
 function addCustomerName(customerInfo){
