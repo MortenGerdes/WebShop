@@ -35,7 +35,16 @@ function loggedIn() {
     thePic.setAttribute("alt", "A picture of a basket");
     thePic.setAttribute("style", "width: 75px; height: 75px;");
     reDirect.appendChild(thePic);
+    var reDirect2 = document.createElement("a");
+    reDirect2.setAttribute("href", "http://localhost:8081/profile.html");
+    var thePic2 = document.createElement("img");
+    thePic2.setAttribute("src", "http://www.freeiconspng.com/uploads/profile-icon-9.png");
+    thePic2.setAttribute("alt", "A picture of a person");
+    thePic2.setAttribute("style", "width: 75px; height: 75px;");
+    reDirect2.appendChild(thePic2);
+
     logInField.appendChild(reDirect);
+    logInField.appendChild(reDirect2);
 }
 
 function toCreateUser() {
