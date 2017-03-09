@@ -39,6 +39,9 @@ public class Week3Runner {
             case "deleteItem":
                 deleteItem(args[1]);
                 break;
+            case "deleteMultipleItems":
+                deleteMultipleItems(args);
+                break;
             case "createCustomer":
                 createCustomer(args);
                 break;
@@ -200,6 +203,15 @@ public class Week3Runner {
             System.out.println("Failed to delete Item");
         }
         listDeletedItems("303");
+    }
+
+    private static void deleteMultipleItems(String[] args)
+    {
+        args[0] = "0";
+        for(String arg: args)
+        {
+            deleteItem(arg);
+        }
     }
 
     private static void createCustomer(String[] args) {
