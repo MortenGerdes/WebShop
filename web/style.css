@@ -2,10 +2,6 @@ body
 {
     background: #f0f0f0;
     font-family: Arial;
-
-
-
-
 }
 
 img
@@ -32,6 +28,7 @@ img
     min-width: 100%;
     display: inline-flex;
    /* margin-left: 30px; */
+    margin-left: 0.5%;
     margin-right: 30px;
     font-size: 30px;
     font-family: Arial;
@@ -44,7 +41,6 @@ img
     font-family: Arial;
     float: left;
     margin: 0.5%;
-    margin-left: 30px;
     width: 12%;
     max-width: 400px;
     min-width: 100px;
@@ -136,13 +132,10 @@ input[name="addtocart"]
 
 .form{
     font-family: Arial;
-
-
     padding-left: 4%;
     padding-top: 8%;
 }
 
-.padding
 
 #searchOption{
     padding-top: 40px;

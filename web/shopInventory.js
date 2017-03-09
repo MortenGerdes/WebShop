@@ -59,6 +59,7 @@ function addItemsToTable(items) {
             continue;
         }
         //Create a new line for this item
+
         var special = document.createElement("div");
         special.setAttribute("class", "specificproductouter");
 
