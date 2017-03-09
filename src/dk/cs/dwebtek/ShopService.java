@@ -32,9 +32,22 @@ public class ShopService {
     @GET
     @Path("items")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Item> getItems() {
+    public List<Item> getItems()
+    {
         return CloudServiceSingleton.getInstance().itemsFromXMLToJava();
     }
+
+    @POST
+    @Path("itemswithpost")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.WILDCARD)
+    public List<Item> getItems(String x)
+    {
+        JSONObject cusInfo = new JSONObject(x);
+        String id = cusInfo.getString("id");
+        return CloudServiceSingleton.getInstance().itemsFromXMLToJava(""+id);
+    }
+
 
     @GET
     @Path("customer")
@@ -164,7 +177,8 @@ public class ShopService {
     public List<Item> filterSearch(String x) {
         JSONObject obj = new JSONObject(x);
         String searchQuery = obj.getString("query");
-        List<Item> oldItems = CloudServiceSingleton.getInstance().itemsFromXMLToJava();
+        String shopID = obj.getString("shopID");
+        List<Item> oldItems = CloudServiceSingleton.getInstance().itemsFromXMLToJava(shopID);
         List<Item> newItems = new ArrayList<>();
         for (Item oldItem : oldItems) {
             if (oldItem.getItemName().toLowerCase().contains(searchQuery.toLowerCase())) {

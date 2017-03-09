@@ -142,7 +142,7 @@ function buyConfirmed() {
     }, delay);
 
     setTimeout(function () {
-        window.location.replace("/index.html");
+        window.location.replace("http://webtek.cs.au.dk/projects/au566498/dev/index.html");
     }, delay+100)
 
 }
@@ -151,7 +151,7 @@ function clearBasket() {
     sendRequest("GET", "rest/shop/clearBasket", null, function (){
     });
     alert("Basket Cleared!");
-    window.location.replace("/index.html")
+    window.location.replace("http://webtek.cs.au.dk/projects/au566498/dev/index.html")
 }
 
 function buyItem(item) {

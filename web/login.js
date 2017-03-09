@@ -29,14 +29,14 @@ function loggedIn() {
     var logInField = document.getElementById("logInButton");
     var logInFieldValue = logInField.innerHTML = "";
     var reDirect = document.createElement("a");
-    reDirect.setAttribute("href", "http://localhost:8081/basket.html");
+    reDirect.setAttribute("href", "	http://webtek.cs.au.dk/projects/au566498/dev/basket.html");
     var thePic = document.createElement("img");
     thePic.setAttribute("src", "https://cdn4.iconfinder.com/data/icons/greicons-2/1052/CARRITO-512.png");
     thePic.setAttribute("alt", "A picture of a basket");
     thePic.setAttribute("style", "width: 75px; height: 75px;");
     reDirect.appendChild(thePic);
     var reDirect2 = document.createElement("a");
-    reDirect2.setAttribute("href", "http://localhost:8081/profile.html");
+    reDirect2.setAttribute("href", "http://webtek.cs.au.dk/projects/au566498/dev/profile.html");
     var thePic2 = document.createElement("img");
     thePic2.setAttribute("src", "http://www.freeiconspng.com/uploads/profile-icon-9.png");
     thePic2.setAttribute("alt", "A picture of a person");
@@ -57,14 +57,14 @@ function loggedIn() {
 function logOut() {
     sendRequest("GET", "rest/shop/logOut", null, function (response) {
         alert("logged out!");
-        window.location.replace("http://localhost:8081/index.html");
+        window.location.replace("	http://webtek.cs.au.dk/projects/au566498/dev/index.html");
     })
 
     logInField.appendChild(reDirect2);
 }
 
 function toCreateUser() {
-    window.location.replace("http://localhost:8081/createAccount.html");
+    window.location.replace("http://webtek.cs.au.dk/projects/au566498/dev/createAccount.html");
 }
 
 ////

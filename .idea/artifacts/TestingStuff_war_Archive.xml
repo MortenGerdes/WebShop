@@ -1,7 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="exploded-war" name="TestingStuff:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/TestingStuff_war_exploded</output-path>
-    <root id="root">
+  <artifact type="war" name="TestingStuff:war Archive">
+    <output-path>$PROJECT_DIR$/out/artifacts/TestingStuff_war_Archive</output-path>
+    <root id="archive" name="TestingStuff_war Archive.war">
+      <element id="javaee-facet-resources" facet="TestingStuff/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="TestingStuff" />
@@ -9,10 +10,10 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="org.jdom:jdom2:2.0.6" />
           <element id="library" level="project" name="com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.8.7" />
+          <element id="library" level="project" name="Jersey-2.2" />
           <element id="library" level="project" name="org.json:json:20160810" />
         </element>
       </element>
-      <element id="javaee-facet-resources" facet="TestingStuff/web/Web" />
     </root>
   </artifact>
 </component>

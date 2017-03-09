@@ -3,6 +3,7 @@
  */
 //Run this function when we have loaded the HTML document
 window.onload = function () {
+    document.getElementById("selectShop").value = "303";
     //This code is called when the body element has been loaded and the application starts
 
     //Request items from the server. The server expects no request body, so we set it to null
@@ -16,6 +17,16 @@ window.onload = function () {
             }
         })
     }, 1000);
+
+    setTimeout(function () {
+        var id = document.getElementById("selectShop").value;
+        var obj = {"id": "303"};
+        sendRequest("POST", "rest/shop/itemswithpost", JSON.stringify(obj), function (itemsText) {
+            //This code is called when the server has sent its data
+            var items = JSON.parse(itemsText);
+            addItemsToTable(items);
+        })
+    }, 1500)
 };
 
 var oldQuery = "";
@@ -24,6 +35,7 @@ function updateItemsFromSearch() {
     if (searchQuery != oldQuery) {
         oldQuery = searchQuery;
         var queryObject = {"query": searchQuery};
+        queryObject["shopID"] = document.getElementById("selectShop").value;
         if (searchQuery != "Search product" && searchQuery != "") {
             sendRequest("POST", "rest/shop/searchitem", JSON.stringify(queryObject), function (response) {
                 var items = JSON.parse(response);
@@ -38,7 +50,9 @@ function updateItemsFromSearch() {
 }
 
 function addAllItems() {
-    sendRequest("GET", "rest/shop/items", null, function (itemsText) {
+    var id = document.getElementById("selectShop").value;
+    var obj = {"id": id};
+    sendRequest("POST", "rest/shop/itemswithpost", JSON.stringify(obj), function (itemsText) {
         //This code is called when the server has sent its data
         var items = JSON.parse(itemsText);
         addItemsToTable(items);

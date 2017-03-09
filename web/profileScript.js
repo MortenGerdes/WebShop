@@ -37,13 +37,6 @@ function addItemsToSalesTable(items) {
 
         var newRow = document.createElement("tr");
 
-        var itemURL = document.createElement("td");
-        var thePic = document.createElement("img");
-        thePic.setAttribute("src", item.itemURL);
-        thePic.setAttribute("alt", "Cover art of the game");
-        itemURL.appendChild(thePic);
-        newRow.appendChild(itemURL);
-
         var itemName = document.createElement("td");
         itemName.textContent = item.itemName;
         newRow.appendChild(itemName);
