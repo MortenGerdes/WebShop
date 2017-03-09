@@ -109,6 +109,14 @@ public class ShopService {
         return (List<Item>) session.getAttribute(((String) session.getAttribute("loggedIn")) + "basket");
     }
 
+    @GET
+    @Path("clearBasket")
+    public void clearBasket(){
+        session.setAttribute((((String) session.getAttribute("loggedIn")) + "basket"), new ArrayList<Item>());;
+        System.out.println("Cleared basket");
+    }
+
+
     @POST
     @Path("newCustomer")
     @Consumes(MediaType.WILDCARD)
