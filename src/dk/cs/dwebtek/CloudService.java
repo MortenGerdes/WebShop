@@ -81,7 +81,7 @@ public class CloudService
 
     public OperationResult<Document> createBodyForItemStock(int itemID, int adjustment)
     {
-        Element adjust = new Element("AdjustItemStock", NS);
+        Element adjust = new Element("adjustItemStock", NS);
         adjust.addContent(new Element("shopKey", NS).setText(SHOP_KEY));
         adjust.addContent(new Element("itemID", NS).setText("" + itemID));
         adjust.addContent(new Element("adjustment", NS).setText("" + adjustment));

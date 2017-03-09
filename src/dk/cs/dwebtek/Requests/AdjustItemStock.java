@@ -23,7 +23,7 @@ public class AdjustItemStock implements PostRequest<Document>
     @Override
     public String getPath()
     {
-        return "/AdjustItemStock";
+        return "/adjustItemStock";
     }
 
     @Override

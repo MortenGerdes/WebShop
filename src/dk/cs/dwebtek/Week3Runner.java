@@ -4,10 +4,13 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.output.XMLOutputter;
 
+import java.util.List;
+
 /**
  * Created by mortenkrogh-jespersen on 06/02/2017.
  */
-public class Week3Runner {
+public class Week3Runner
+{
     private static CloudService service = new CloudService();
 
     public static void main(String[] args) {
