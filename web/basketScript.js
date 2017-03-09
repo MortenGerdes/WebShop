@@ -93,6 +93,7 @@ function addItemsToBasket(basketList) {
         price.textContent = item.itemPrice;
         newRow.appendChild(price);
 
+
         var total = document.createElement("td");
         total.setAttribute("id", "total" + i);
         total.textContent = item.itemPrice;
