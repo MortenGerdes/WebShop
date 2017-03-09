@@ -150,6 +150,8 @@ public class ShopService
         return newItems;
     }
 
+    @GET
+    @Path("isLoggedIn")
     public boolean isLoggedIn()
     {
         if(session.getAttribute("loggedIn") != null)
