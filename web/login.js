@@ -13,11 +13,11 @@ function login() {
     sendRequest("POST", "rest/shop/login", JSON.stringify(cusInfo), function (response) {
         if (response == "OK") {
             alert("logged in");
-            logedIn();
+            loggedIn();
         }
         else if (response == "ACTIVE") {
             alert("Already logged in!");
-            logedIn();
+            loggedIn();
         }
         else {
             alert("Wrong username or password (Or server is busy)");
@@ -25,7 +25,7 @@ function login() {
     })
 }
 //abe
-function logedIn() {
+function loggedIn() {
     var logInField = document.getElementById("logInButton");
     var logInFieldValue = logInField.innerHTML = "";
     var reDirect = document.createElement("a");

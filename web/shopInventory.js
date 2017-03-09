@@ -10,11 +10,20 @@ window.onload = function () {
 
     addAllItems();
     updateItemsFromSearch();
+    document.addEventListener('DOMContentLoaded', function () {
+        sendRequest("GET", "rest/shop/isLoggedIn", null, function (response) {
+            if (response == "true") {
+                loggedIn()
+            }
+        })
+    }, false);
 };
+
+
 var oldQuery = "";
 function updateItemsFromSearch() {
     var searchQuery = document.getElementById("searchField").value;
-    if(searchQuery != oldQuery) {
+    if (searchQuery != oldQuery) {
         oldQuery = searchQuery;
         var queryObject = {"query": searchQuery};
         if (searchQuery != "Search product" && searchQuery != "") {

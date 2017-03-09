@@ -16,7 +16,7 @@ function createCustomer() {
             console.log(response);
             if (response == "OK") {
                 alert("Bruger oprettet!");
-                window.location.replace("http://localhost:8081/login.html");
+                window.location.replace("http://localhost:8081/index.html");
             }
             if (response == "FAILED") {
                 var message = "Bruger ikke oprettet! Måske er der allerede nogen der har brugt dit brugernavn, eller serveren har travlt. Kun bogstaver fra A-Z er ikke tilladt";
