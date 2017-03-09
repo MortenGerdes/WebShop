@@ -36,6 +36,21 @@ function loggedIn() {
     thePic.setAttribute("style", "width: 75px; height: 75px;");
     reDirect.appendChild(thePic);
     logInField.appendChild(reDirect);
+
+    var logOut = document.createElement("input");
+    logOut.setAttribute("type", "submit");
+    logOut.setAttribute("value", "Log Ud");
+    logOut.setAttribute("onclick", "logOut()");
+    console.log(logOut);
+    logInField.appendChild(logOut);
+}
+
+function logOut() {
+    sendRequest("GET", "rest/shop/logOut", null, function (response) {
+        alert("logged out!");
+        window.location.replace("http://localhost:8081/index.html");
+    })
+
 }
 
 function toCreateUser() {

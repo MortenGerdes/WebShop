@@ -15,7 +15,7 @@ window.onload = function () {
                 loggedIn()
             }
         })
-    }, 300);
+    }, 1000);
 };
 
 
