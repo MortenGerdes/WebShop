@@ -41,6 +41,7 @@ function loggedIn() {
     logOut.setAttribute("type", "submit");
     logOut.setAttribute("value", "Log Ud");
     logOut.setAttribute("onclick", "logOut()");
+    logOut.setAttribute("style", "display: block;");
     console.log(logOut);
     logInField.appendChild(logOut);
 }
